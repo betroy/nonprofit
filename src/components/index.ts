@@ -1,0 +1,1 @@
+export {CommonModal} from './modal/commonmodal'
