@@ -1,0 +1,20 @@
+{
+    "envId": "nonprofit-8g11k5jj7aa730f7",
+    "version": "2.0",
+    "$schema": "https://framework-1258016615.tcloudbaseapp.com/schema/latest.json",
+    "functionRoot": "./functions",
+    "functions": [],
+    "region": "ap-shanghai",
+    "framework": {
+        "name": "nonprofit",
+        "plugins": {
+            "client": {
+                "use": "@cloudbase/framework-plugin-website",
+                "inputs": {
+                  "buildCommand": "yarn run build:h5",
+                  "outputPath": "dist"
+                }
+              }
+        }
+    }
+}
