@@ -8,11 +8,10 @@ import './index.scss'
 
 type PageStateProps = {
   store: {
-    counterStore: {
-      counter: number,
-      increment: Function,
-      decrement: Function,
-      incrementAsync: Function
+    indexStore: {
+      isShowRuleModal: Boolean,
+      showModal: Function,
+      hideModal: Function,
     }
   }
 }
@@ -34,34 +33,47 @@ class Index extends Component {
 
   componentDidHide() { }
 
-  increment = () => {
-    const { counterStore } = this.props.store
-    counterStore.increment()
-  }
-
-  decrement = () => {
-    const { counterStore } = this.props.store
-    counterStore.decrement()
-  }
-
-  incrementAsync = () => {
-    const { counterStore } = this.props.store
-    counterStore.incrementAsync()
+  showModal = () => {
+    const { indexStore } = this.props.store
+    indexStore.showModal()
   }
 
   render() {
-    const { counterStore: { counter } } = this.props.store
+    const { indexStore: { isShowRuleModal } } = this.props.store
     return (
       <View className='index'>
         <View className='head'>
-          <Button size='mini'>text</Button>
+          <Text className='rule' onClick={() => {
+            this.showModal()
+          }}>活动规则</Text>
+
+          <View className='statistic-wrapper'>
+            <Text>完成任务人数:5422人</Text>
+            <Text>已捐出书本:520本</Text>
+          </View>
         </View>
 
-        <CommonModal title='' content='' onCancelClick={() => {
-          console.log('onCancelClick')
-        }} onConfirmClick={() => {
-          console.log('onConfirmClick')
-        }} />
+        <Text>完成任意一个任务即可解锁环保勋章</Text>
+
+        <View className='item-task'>
+          <Text>旧衣捐赠</Text>
+          <Button size='mini'>去完成</Button>
+        </View>
+
+        <View className='item-task'>
+          <Text>旧物改造</Text>
+          <Button size='mini'>去完成</Button>
+        </View>
+
+        <View className='item-task'>
+          <Text>线下沙龙</Text>
+          <Button size='mini'>去完成</Button>
+        </View>
+
+        {isShowRuleModal &&
+          <CommonModal title='' content='' onCancelClick={() => {
+          }} onConfirmClick={() => {
+          }} />}
       </View>
     )
   }

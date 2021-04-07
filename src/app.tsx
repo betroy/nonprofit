@@ -1,14 +1,14 @@
 import { Component } from 'react'
 import { Provider } from 'mobx-react'
 
-import counterStore from './store/index-store'
+import indexStore from './store/index-store'
 
 import './tcb'
 
 import './app.scss'
 
 const store = {
-  counterStore
+  indexStore
 }
 
 class App extends Component {

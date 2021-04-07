@@ -2,18 +2,19 @@ import { observable } from 'mobx'
 import Taro from '@tarojs/taro'
 import { Request } from '../core/network'
 
-const counterStore = observable({
-  isShowModal: false,
+const indexStore = observable({
+  isShowRuleModal: false,
+  counter: 0,
 
   showModal() {
-    this.isShowModal = true
+    this.isShowRuleModal = true
+    console.log('indexStore')
   },
 
   hideModal() {
-    this.isShowModal = false
+    this.isShowRuleModal = false
   },
 
-  counter: 0,
   counterStore() {
     this.counter++
   },
@@ -40,4 +41,4 @@ const counterStore = observable({
   }
 })
 
-export default counterStore
+export default indexStore
