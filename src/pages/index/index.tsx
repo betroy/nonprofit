@@ -1,3 +1,4 @@
+import Taro from '@tarojs/taro'
 import { Component } from 'react'
 import { View, Button, Text } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
@@ -7,12 +8,10 @@ import { CommonModal } from '../../components'
 import './index.scss'
 
 type PageStateProps = {
-  store: {
-    indexStore: {
-      isShowRuleModal: Boolean,
-      showModal: Function,
-      hideModal: Function,
-    }
+  indexStore: {
+    isShowRuleModal: Boolean,
+    showModal: Function,
+    hideModal: Function,
   }
 }
 
@@ -20,7 +19,7 @@ interface Index {
   props: PageStateProps;
 }
 
-@inject('store')
+@inject('indexStore')
 @observer
 class Index extends Component {
   componentWillMount() { }
@@ -33,19 +32,25 @@ class Index extends Component {
 
   componentDidHide() { }
 
-  showModal = () => {
-    const { indexStore } = this.props.store
+  _showModal = () => {
+    const { indexStore } = this.props
     indexStore.showModal()
   }
 
   render() {
-    const { indexStore: { isShowRuleModal } } = this.props.store
+    const { isShowRuleModal } = this.props.indexStore
     return (
       <View className='index'>
         <View className='head'>
           <Text className='rule' onClick={() => {
-            this.showModal()
+            this._showModal()
           }}>活动规则</Text>
+
+          <Text className='share' onClick={() => {
+            Taro.navigateTo({
+              url: '/pages/share/share',
+            })
+          }}>分享</Text>
 
           <View className='statistic-wrapper'>
             <Text>完成任务人数:5422人</Text>

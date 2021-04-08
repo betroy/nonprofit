@@ -1,29 +1,25 @@
 import { Component } from 'react'
 import { Provider } from 'mobx-react'
 
-import indexStore from './store/index-store'
+import stores from './store'
 
 import './tcb'
 
 import './app.scss'
 
-const store = {
-  indexStore
-}
-
 class App extends Component {
-  componentDidMount () {}
+  componentDidMount() { }
 
-  componentDidShow () {}
+  componentDidShow() { }
 
-  componentDidHide () {}
+  componentDidHide() { }
 
-  componentDidCatchError () {}
+  componentDidCatchError() { }
 
   // this.props.children 就是要渲染的页面
-  render () {
+  render() {
     return (
-      <Provider store={store}>
+      <Provider {...stores}>
         {this.props.children}
       </Provider>
     )

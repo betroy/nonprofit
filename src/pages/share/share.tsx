@@ -4,25 +4,23 @@ import { observer, inject } from 'mobx-react'
 
 import { CommonModal } from '../../components'
 
-import './index.scss'
+import './share.scss'
 
 type PageStateProps = {
-  store: {
-    indexStore: {
-      isShowRuleModal: Boolean,
-      showModal: Function,
-      hideModal: Function,
-    }
+  shareStore: {
+    isShowRuleModal: Boolean,
+    showModal: Function,
+    hideModal: Function,
   }
 }
 
-interface Index {
+interface Share {
   props: PageStateProps;
 }
 
-@inject('store')
+@inject('shareStore')
 @observer
-class Index extends Component {
+class Share extends Component {
   componentWillMount() { }
 
   componentDidMount() { }
@@ -34,41 +32,18 @@ class Index extends Component {
   componentDidHide() { }
 
   showModal = () => {
-    const { indexStore } = this.props.store
-    indexStore.showModal()
+    const { shareStore } = this.props
+    shareStore.showModal()
   }
 
   render() {
-    const { indexStore: { isShowRuleModal } } = this.props.store
+    const { shareStore: { isShowRuleModal } } = this.props
     return (
-      <View className='index'>
-        <View className='head'>
-          <Text className='rule' onClick={() => {
-            this.showModal()
-          }}>活动规则</Text>
+      <View className='share'>
+        <Text className='rule' onClick={() => {
+          this.showModal()
+        }}>活动规则</Text>
 
-          <View className='statistic-wrapper'>
-            <Text>完成任务人数:5422人</Text>
-            <Text>已捐出书本:520本</Text>
-          </View>
-        </View>
-
-        <Text>完成任意一个任务即可解锁环保勋章</Text>
-
-        <View className='item-task'>
-          <Text>旧衣捐赠</Text>
-          <Button size='mini'>去完成</Button>
-        </View>
-
-        <View className='item-task'>
-          <Text>旧物改造</Text>
-          <Button size='mini'>去完成</Button>
-        </View>
-
-        <View className='item-task'>
-          <Text>线下沙龙</Text>
-          <Button size='mini'>去完成</Button>
-        </View>
 
         {isShowRuleModal &&
           <CommonModal title='' content='' onCancelClick={() => {
@@ -79,4 +54,4 @@ class Index extends Component {
   }
 }
 
-export default Index
+export default Share
