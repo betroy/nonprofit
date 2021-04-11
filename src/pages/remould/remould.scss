@@ -1,0 +1,15 @@
+.remould {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-wrapper {
+  display: flex;
+  width: 400px;
+  height: 100px;
+  background: #ccc;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}

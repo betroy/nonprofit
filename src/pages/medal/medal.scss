@@ -1,0 +1,23 @@
+.share {
+  display: flex;
+  flex-direction: column;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.rule {
+  margin-top: 30px;
+  align-self: flex-end;
+}
+
+.reward-tips {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.rule-tips {
+  margin-top: 30px;
+}

@@ -24,25 +24,6 @@ Taro.cloud
     .then((res) => {
         // 登录成功
         console.log('res :>> ', res);
-
-        const db = Taro.cloud.database()
-
-        // const collection = db.collection("user")
-        // collection.where({
-        //     _openid: '8cea6dcc3cfd485199daf373c70419c6' // 填入当前用户 openid
-        // }).count().then(res => {
-        //     console.log(res.total)
-        // })
-
-        db.collection("user")
-            .count().then(res => {
-                console.log(res)
-            })
-
-        // db.collection('user').limit(10)
-        //     .get()
-        //     .then(console.log)
-        //     .catch(console.error)
     })
     .catch((err) => {
         // 登录失败

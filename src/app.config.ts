@@ -1,7 +1,12 @@
 export default {
   pages: [
     'pages/index/index',
-    'pages/share/share',
+    'pages/donate/donate',
+    'pages/donate/donate-result',
+    'pages/remould/remould',
+    'pages/remould/remould-course',
+    'pages/remould/remould-result',
+    'pages/medal/medal',
   ],
   window: {
     backgroundTextStyle: 'light',

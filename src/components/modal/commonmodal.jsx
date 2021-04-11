@@ -17,14 +17,14 @@ class CommonModal extends Component {
     //#region [ui] 
     //-------------------------------------
     render() {
-        const { title, content, cancelText, confirmText, onCancelClick, onConfirmClick } = this.props
+        const { title, content, cancelText, confirmText, onCancelClick, onConfirmClick, onCloseClick } = this.props
         return (
             <View className='mask'>
                 <View className='modal'>
                     {/** 标题 */}
                     <View className='head'>
                         <Text className='title'>{title}</Text>
-                        <Image className='image' src={closePng} onClick={() => this.handleOnClose()} />
+                        <Image className='image' src={closePng} onClick={() => onCloseClick()} />
                     </View>
                     {/** 内容 */}
                     <Text className='content'>{content}</Text>
@@ -32,7 +32,8 @@ class CommonModal extends Component {
                         {/** 分割线 */}
                         <View className='horizontal-line' />
                         {/** 按钮 */}
-                        <View className='content-btn' onClick={() => onCancelClick()}>
+                        {/**
+                            <View className='content-btn' onClick={() => onCancelClick()}>
                             <View className='left-btn'>
                                 <Text className='left-btn-text'>{cancelText}</Text>
                             </View>
@@ -41,6 +42,7 @@ class CommonModal extends Component {
                                 <Text className='right-btn-text'>{confirmText}</Text>
                             </View>
                         </View>
+                         */}
                     </View>
                 </View>
             </View >
@@ -63,7 +65,8 @@ CommonModal.propTypes = {
     cancelText: PropTypes.string, //取消按钮的文字，默认为"取消"
     confirmText: PropTypes.string, //确定按钮的文字，默认为"确定"
     onCancelClick: PropTypes.func.isRequired, //取消事件
-    onConfirmClick: PropTypes.func.isRequired //确定事件
+    onConfirmClick: PropTypes.func.isRequired, //确定事件
+    onCloseClick: PropTypes.func.isRequired, //关闭弹窗事件
 }
 
 export { CommonModal }

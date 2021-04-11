@@ -42,29 +42,21 @@ const Constants = {
   CACHE_KEY: {
     /** 用户ID */
     USER_ID: 'userid',
-    /** 用户token */
-    USER_TOKEN: 'token',
-    /** 用户是否实名 */
-    USER_VERIFY: 'verify',
-    /** 用户名 */
-    USER_NAME: 'name',
-    /** 用户手机号 */
-    USER_PHONE: 'phone_num',
   },
 
   // 广播 event key
   EVENT_KEY: {
-    LOGIN: 'login',                               // 登录事件
-    SEND_LOGIN_SMS: 'send-login-sms',             // 发送验证码短信成功
-    LOGIN_STATE_CHANGE: 'login-state-change',     // 登录状态改变
+    LOGIN: 'login',               // 登录事件
   },
 
   PAGE: {
-    Index: 'modules/pages/index/index',
-    Ucenter: 'modules/pages/ucenter/ucenter',
-    // 鼎象验证码页
-    Verify: 'modules/pages/ucenter/dxVerify',
-    Register: 'modules/pages/ucenter/register',
+    Index: '/pages/index/index',
+    Remould: '/pages/remould/remould',
+    RemouldResult: '/pages/remould/remould-result',
+    RemouldCourse:'/pages/remould/remould-course',
+    Donate: '/pages/donate/donate',
+    DonateResult: '/pages/donate/donate-result',
+    Share: '/pages/medal/medal',
   }
 
 }
