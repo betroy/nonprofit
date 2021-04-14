@@ -5,7 +5,10 @@ import { Cache, Constants } from '../core/utils'
 
 const indexStore = observable({
   isShowRuleModal: false,
-  counter: 0,
+  taskFinishCount: 0, //任务完成人数
+  isFinishDonateTask: false,  //是否完成旧衣捐赠任务
+  isFinishRemouldTask: false, //是否完成旧物改造任务
+  isFinishSalonTask: false, //是否完成线下沙龙任务
 
   showModal() {
     this.isShowRuleModal = true
@@ -18,12 +21,8 @@ const indexStore = observable({
   //查询完成任务人数
   queryTaskFinishCount() {
     const db = Taro.cloud.database()
-    const userCollection = db.collection('user')
-    const command = db.command
+    const userCollection = db.collection('task')
     userCollection
-      .where({
-        task: command.in([''])
-      })
       .count()
       .then(res => {
         console.log(res)
@@ -50,6 +49,16 @@ const indexStore = observable({
   //保留小程序传递的userid
   saveUserid(userid: String) {
     new Cache().set(Constants.CACHE_KEY.USER_ID, userid, true)
+  },
+
+  //查询线下沙龙任务完成状态
+  async querySalonTaskStatus() {
+    const request = new Request(
+      '',
+      ''
+    );
+    const response = await request.post({
+    });
   }
 })
 
