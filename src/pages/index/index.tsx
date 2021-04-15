@@ -16,6 +16,7 @@ type PageStateProps = {
     queryTaskFinishCount: Function,
     queryTaskStatus: Function,
     saveUserid: Function,
+    navigateToLogin: Function,
   }
 }
 
@@ -34,6 +35,7 @@ class Index extends Component {
   componentDidMount() {
     //接收小程序传递过来的参数
     console.log('params', getCurrentInstance().router.params)
+    const { userid } = getCurrentInstance().router.params
     this._saveUserid('421575839')
     this._queryTaskFinishCount()
     this._queryTaskStatus()
@@ -62,12 +64,17 @@ class Index extends Component {
 
   _showModal = () => {
     const { indexStore } = this.props
-    indexStore.showModal()
+    // indexStore.showModal()
+    indexStore.navigateToLogin()
   }
 
   _hideModal = () => {
     const { indexStore } = this.props
     indexStore.hideModal()
+  }
+
+  _navigateLogin = () => {
+    const { indexStore } = this.props
   }
 
   render() {

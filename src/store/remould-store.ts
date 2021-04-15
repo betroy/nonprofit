@@ -83,7 +83,27 @@ const remouldStore = observable({
         // https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/421575839/donate/951.jpg?watermark/1/image/aHR0cHM6Ly82ZTZmLW5vbnByb2ZpdC04ZzExazVqajdhYTczMGY3LTEyNTQ2NDE1NTcudGNiLnFjbG91ZC5sYS93YXRlcm1hcmsucG5n/gravity/southeast
         // https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/421575839/donate/950.jpg?watermark/1/image/https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/watermark.png/gravity/southeast
 
-    }
+    },
+
+    //通知更新旧物改造任务状态
+    async updateRemouldTaskStatus() {
+        const request = new Request(
+            '',
+            ''
+        );
+        const response = await request.post({
+        });
+    },
+
+    //更新旧物改造任务状态
+    async notifyRemouldTaskStatus() {
+        const request = new Request(
+            '',
+            ''
+        );
+        const response = await request.post({
+        });
+    },
 })
 
 export default remouldStore

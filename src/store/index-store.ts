@@ -23,9 +23,12 @@ const indexStore = observable({
     const db = Taro.cloud.database()
     const userCollection = db.collection('task')
     userCollection
-      .count()
+      .where({
+        _id: '17453ede6077cb5601ac9f8f4ab6d830'
+      })
+      .get()
       .then(res => {
-        console.log(res)
+        console.log('queryTaskFinishCount:', res)
       })
   },
 
@@ -59,7 +62,12 @@ const indexStore = observable({
     );
     const response = await request.post({
     });
-  }
+  },
+  //未携带用户标识的url 先跳去登录页
+  navigateToLogin() {
+    window.location.href = 'https://www.runoob.com'
+  },
+
 })
 
 export default indexStore
