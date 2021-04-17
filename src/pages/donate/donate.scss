@@ -2,7 +2,58 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-size: 100% 100%;
+  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/bg_donate.png);
 }
-.rule {
-  align-self: flex-end;
+
+.back {
+  width: 98px;
+  height: 54px;
+  margin-top: 35px;
+  background-size: 100% 100%;
+  align-self: flex-start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/common/ic_back.png);
+
+  .text {
+    text-align: center;
+    font-size: 24px;
+    font-family: PingFang SC;
+    color: #ffffff;
+    font-weight: 600;
+  }
+}
+
+.image-text-1 {
+  width: 313px;
+  height: 45px;
+  margin-top: 89px;
+}
+
+.image-text-2 {
+  width: 504px;
+  height: 63px;
+  margin-top: 18px;
+}
+
+.image-donate-tips {
+  width: 659px;
+  height: 300px;
+  margin-top: 95px;
+}
+
+.image-takephoto-tips {
+  width: 559px;
+  height: 172px;
+  margin-top: 45px;
+}
+
+.image-submit-btn {
+  width: 500px;
+  height: 100px;
+  margin-top: 15px;
 }

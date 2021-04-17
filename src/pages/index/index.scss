@@ -1,6 +1,220 @@
+.index {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-size: 100% 100%;
+  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/bg_index.png);
+}
+
+.spacebetween {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.back {
+  width: 98px;
+  height: 54px;
+  margin-top: 35px;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/common/ic_back.png);
+
+  .text {
+    font-size: 24px;
+    font-family: PingFang SC;
+    color: #ffffff;
+    font-weight: 600;
+  }
+}
+
+.rule {
+  width: 128px;
+  height: 54px;
+  margin-top: 35px;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/common/ic_rule.png);
+
+  .text {
+    font-size: 24px;
+    font-family: PingFang SC;
+    color: #ffffff;
+    font-weight: 600;
+  }
+}
+.nonprofit-brand {
+  width: 251px;
+  height: 50px;
+  margin-top: 23px;
+  margin-left: 41px;
+}
+
+.bank-brand {
+  width: 367px;
+  height: 148px;
+  margin-left: 26px;
+  margin-top: 16px;
+}
+
+.events-time-text {
+  font-family: Yuanti SC;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0px 13px 18px rgba(0, 66, 217, 0.17);
+  margin-left: 41px;
+}
+
+.image-task-count {
+  z-index: 1;
+  display: flex;
+  width: 698px;
+  height: 225px;
+  margin-top: 50px;
+  align-self: center;
+  flex-direction: row;
+  background-size: 100% 100%;
+  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/bg_index_task_count.png);
+
+  .task-count-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
+  .task-count-label {
+    font-size: 24px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #000000;
+    opacity: 0.6;
+  }
+
+  .task-count-text {
+    font-size: 48px;
+    font-family: Roboto;
+    font-weight: bold;
+    color: #ff4800;
+  }
+}
+
+.task-count-box {
+  display: flex;
+  width: 671px;
+  height: 802px;
+  align-self: center;
+  flex-direction: column;
+  margin-top: -60px;
+  background-size: 100% 100%;
+  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/bg_index_task_box.png);
+
+  .head-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 90px;
+    margin-left: 49px;
+    margin-right: 49px;
+
+    .left-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
+    }
+
+    .text {
+      font-size: 24px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color: #000000;
+      opacity: 0.6;
+      margin-top: 16px;
+    }
+
+    .tips {
+      width: 276px;
+      height: 38px;
+    }
+
+    .gift {
+      width: 95px;
+      height: 103px;
+    }
+  }
+
+  .space-46 {
+    height: 26px;
+  }
+
+  .item-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 40px;
+    margin-right: 40px;
+
+    .image {
+      width: 140px;
+      height: 147px;
+      margin-top: 25px;
+    }
+
+    .title {
+      font-size: 28px;
+      font-family: PingFang SC;
+      font-weight: 600;
+      color: #000001;
+    }
+
+    .desc {
+      font-size: 24px;
+      font-family: PingFang SC;
+      color: #000000;
+      opacity: 0.6;
+      margin-top: 6px;
+    }
+
+    .text-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-left: 20px;
+    }
+
+    .btn-wrapper {
+      width: 130px;
+      height: 54px;
+      border-radius: 27px;
+      background: red;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .text {
+        font-size: 28px;
+        font-family: PingFang SC;
+        color: #ffffff;
+        font-weight: 600;
+      }
+    }
+
+    .left-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+}
+
 .head {
   display: flex;
-  background: #ccc;
   width: 100%;
   height: 500px;
   flex-direction: column;
