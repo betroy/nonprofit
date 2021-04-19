@@ -35,19 +35,30 @@ const indexStore = observable({
 
   //查询当前用户任务完成状态
   queryTaskStatus() {
-    const cache = new Cache()
-    const userid = cache.get(Constants.CACHE_KEY.USER_ID)
+    const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
     const db = Taro.cloud.database()
-    const userCollection = db.collection('user')
+    const userCollection = db.collection('taskDetail')
     const command = db.command
     userCollection
       .where({
-        _openid: command.eq(userid)
+        userId: userid
       })
       .get()
       .then(res => {
         console.log('queryTaskStatus:', res)
+        this.assembleTaskStatus(res.data)
       })
+  },
+
+  assembleTaskStatus(taskList: Array<Object>) {
+    for (const task of taskList) {
+      console.log('task===>', task)
+      if (Constants.TASK_TYPE.DONATE == task.taskType) {
+        this.isFinishDonateTask = true
+      } else if (Constants.TASK_TYPE.REMOULD == task.taskType) {
+        this.isFinishRemouldTask = true
+      }
+    }
   },
 
   //查询线下沙龙任务完成状态

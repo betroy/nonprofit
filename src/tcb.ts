@@ -29,17 +29,3 @@ Taro.cloud
         // 登录失败
         console.log('err :>> ', err);
     });
-
-// const db = Taro.cloud.database()
-
-// const collection = db.collection("user")
-// collection
-//     .add({
-//         name: "Ben"
-//     })
-//     .then((res) => {
-//         console.log(res)
-//     })
-//     .catch((e) => {
-//         console.log(e)
-//     });

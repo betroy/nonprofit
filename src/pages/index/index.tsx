@@ -11,10 +11,16 @@ import './index.scss'
 type PageStateProps = {
   indexStore: {
     isShowRuleModal: Boolean,
+    isFinishDonateTask: Boolean,
+    isFinishRemouldTask: Boolean,
+    isFinishSalonTask: Boolean,
+    taskFinishCount: Number,
+    donateBookCount: Number,
     showModal: Function,
     hideModal: Function,
     queryTaskFinishCount: Function,
     queryTaskStatus: Function,
+    querySalonTaskStatus: Function,
     saveUserid: Function,
     navigateToLogin: Function,
   }
@@ -30,22 +36,32 @@ interface Index {
 @inject('indexStore')
 @observer
 class Index extends Component {
-  componentWillMount() { }
+  componentWillMount() {
+    console.log('componentWillMount')
+  }
 
   componentDidMount() {
+    console.log('componentDidMount')
     //接收小程序传递过来的参数
     console.log('params', getCurrentInstance().router.params)
     const { userId } = getCurrentInstance().router.params
     this._saveUserid('421575839')
-    this._queryTaskFinishCount()
-    this._queryTaskStatus()
   }
 
-  componentWillUnmount() { }
+  componentWillUnmount() {
+    console.log('componentWillUnmount')
+  }
 
-  componentDidShow() { }
+  componentDidShow() {
+    console.log('componentDidShow')
+    this._queryTaskFinishCount()
+    this._queryTaskStatus()
+    // this._querySalonTaskStatus()
+  }
 
-  componentDidHide() { }
+  componentDidHide() {
+    console.log('componentDidHide')
+  }
 
   _queryTaskFinishCount = () => {
     const { indexStore } = this.props
@@ -55,6 +71,11 @@ class Index extends Component {
   _queryTaskStatus() {
     const { indexStore } = this.props
     indexStore.queryTaskStatus()
+  }
+
+  _querySalonTaskStatus() {
+    const { indexStore } = this.props
+    indexStore.querySalonTaskStatus()
   }
 
   _saveUserid(userid: string) {
@@ -137,9 +158,10 @@ class Index extends Component {
 
             <View className='btn-wrapper'
               onClick={() => {
-                Taro.navigateTo({
-                  url: Constants.PAGE.Donate
-                })
+                isFinishDonateTask ? null :
+                  Taro.navigateTo({
+                    url: Constants.PAGE.Donate
+                  })
               }}>
               <Text className='text'>{isFinishDonateTask ? '已完成' : '去捐赠'}</Text>
             </View>

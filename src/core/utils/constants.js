@@ -26,7 +26,6 @@ const Constants = {
     GET_SALON_TASKSTATUS: '/brcp/ac/emp/wdyx/benefit/getSalonTaskStatus',
   },
 
-
   /** 通用缓存 key */
   CACHE_KEY: {
     /** 用户ID */
@@ -46,6 +45,13 @@ const Constants = {
     Donate: '/pages/donate/donate',
     DonateResult: '/pages/donate/donate-result',
     Share: '/pages/medal/medal',
+  },
+
+  // 1-旧衣捐赠 2-旧物改造 3-线下沙龙
+  TASK_TYPE: {
+    DONATE: '1',
+    REMOULD: '2',
+    SALON: '3',
   }
 
 }

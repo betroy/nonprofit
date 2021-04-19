@@ -109,8 +109,8 @@ const Interceptor = (chain: any) => {
 }
 
 const interceptors = [
-  Interceptor,
-  LoadingInterceptor,
+  // Interceptor,
+  // LoadingInterceptor,
   Taro.interceptors.logInterceptor,
   Taro.interceptors.timeoutInterceptor
 ]

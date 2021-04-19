@@ -74,7 +74,7 @@ class DonateStore {
         const response = await request.post({
             userId: userid,
             taskName: '旧衣捐赠',
-            taskType: '1',//1-旧衣捐赠 2-旧物改造 3-线下沙龙
+            taskType: Constants.TASK_TYPE.DONATE,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
             finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
         });
 
@@ -98,15 +98,14 @@ class DonateStore {
 
     //更新任务明细
     public addTaskDetail() {
-        const cache = new Cache()
-        const userid = cache.get(Constants.CACHE_KEY.USER_ID)
+        const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
         const db = Taro.cloud.database()
         const userCollection = db.collection('taskDetail')
         userCollection
             .add({
                 userId: userid,
                 taskName: '旧衣捐赠',
-                taskType: '1',//1-旧衣捐赠 2-旧物改造 3-线下沙龙
+                taskType: Constants.TASK_TYPE.DONATE,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
                 finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
             })
             .then(res => {
@@ -147,7 +146,7 @@ class DonateStore {
         try {
             const { total } = await userCollection
                 .where({
-                    userid: userid,
+                    userId: userid,
                     taskType: '1',
                 })
                 .count()
@@ -168,7 +167,7 @@ class DonateStore {
         try {
             const { total } = await userCollection
                 .where({
-                    userid: userid,
+                    userId: userid,
                 })
                 .count()
             console.log('queryTaskStatus success total is===>', total)
