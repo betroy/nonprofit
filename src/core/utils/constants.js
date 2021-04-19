@@ -5,21 +5,15 @@
 
 const IS_DEBUG = true
 
-const HOST_SWEB_DEV = ''
-const HOST_SWEB = ''
-
-const H5_CND_DEV = ''
-const H5_CND = ''
+const HOST_DEV = 'https://iclient-stg.pingan.com.cn'
+const HOST_RELEASE = 'https://iclient.pingan.com.cn'
 
 
 const Constants = {
 
   /** 服务主机域名 */
   HOST: {
-    /** jyb 服务主域名 */
-    HOST_SWEB: IS_DEBUG ? HOST_SWEB_DEV : HOST_SWEB,
-
-    H5_CDN: IS_DEBUG ? H5_CND_DEV : H5_CND,
+    HOST_URL: IS_DEBUG ? HOST_DEV : HOST_RELEASE,
   },
 
   /** 各种加密密钥 */
@@ -28,15 +22,10 @@ const Constants = {
 
   /** 接口请求参数 */
   PATH: {
-    /** app 接入层 */
-    APP_ACCESS: '/Trans/access2',
+    ADD_TASKINFO: '/brcp/ac/emp/wdyx/benefit/addTaskInfo',
+    GET_SALON_TASKSTATUS: '/brcp/ac/emp/wdyx/benefit/getSalonTaskStatus',
   },
 
-
-  /** 命令字 */
-  CMD: {
-
-  },
 
   /** 通用缓存 key */
   CACHE_KEY: {
@@ -53,7 +42,7 @@ const Constants = {
     Index: '/pages/index/index',
     Remould: '/pages/remould/remould',
     RemouldResult: '/pages/remould/remould-result',
-    RemouldCourse:'/pages/remould/remould-course',
+    RemouldCourse: '/pages/remould/remould-course',
     Donate: '/pages/donate/donate',
     DonateResult: '/pages/donate/donate-result',
     Share: '/pages/medal/medal',

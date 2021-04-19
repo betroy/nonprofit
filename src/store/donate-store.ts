@@ -2,6 +2,7 @@ import { action, observable } from 'mobx'
 import Taro from '@tarojs/taro'
 import { Request } from '../core/network'
 import { Cache, Constants, Base64 } from '../core/utils'
+import * as dayjs from 'dayjs'
 
 class DonateStore {
     @observable
@@ -24,6 +25,9 @@ class DonateStore {
 
     @action
     public uploadPhotoFile(tempFile) {
+        Taro.showLoading({
+            title: '上传中',
+        })
         const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
         const tempFileName = tempFile.name
         const cloudPathName = userid + '/donate/' + tempFileName
@@ -31,12 +35,16 @@ class DonateStore {
             cloudPath: cloudPathName,
             filePath: tempFile// 文件路径
         }).then(res => {
+            Taro.hideLoading()
             // get resource ID
             console.log(res)
             // this.getWatermarkImage(res.fileID)
             // this.navigateToResult()
             this.showDonateModal()
+            //异步更新任务状态
+            this.updateTask()
         }).catch(error => {
+            Taro.hideLoading()
             // handle error
             console.log('error :', error);
         })
@@ -54,22 +62,121 @@ class DonateStore {
         })
     }
 
-    //更新任务状态
-    public updateTaskStatus() {
+    //调平安接口更新任务状态
+    public async addTaskInfo() {
+        const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
+
+        const request = new Request(
+            Constants.HOST.HOST_URL,
+            Constants.PATH.GET_SALON_TASKSTATUS
+        )
+
+        const response = await request.post({
+            userId: userid,
+            taskName: '旧衣捐赠',
+            taskType: '1',//1-旧衣捐赠 2-旧物改造 3-线下沙龙
+            finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
+        });
+
+        console.log('addTaskInfo:', response)
+    }
+
+    //更新任务
+    public async updateTask() {
+        const isFinish = await this.queryTaskDetailStatus()
+        console.log('updateTask isFinish:', isFinish)
+        if (!isFinish) {
+            this.addTaskDetail()
+        }
+
+        const isDone = await this.queryTaskStatus()
+        console.log('updateTask isDone:', isDone)
+        if (!isDone) {
+            this.addTask()
+        }
+    }
+
+    //更新任务明细
+    public addTaskDetail() {
         const cache = new Cache()
         const userid = cache.get(Constants.CACHE_KEY.USER_ID)
         const db = Taro.cloud.database()
-        const userCollection = db.collection('user')
-        const command = db.command
+        const userCollection = db.collection('taskDetail')
         userCollection
-            .where({
-                userid: userid
+            .add({
+                userId: userid,
+                taskName: '旧衣捐赠',
+                taskType: '1',//1-旧衣捐赠 2-旧物改造 3-线下沙龙
+                finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
             })
-            .get()
             .then(res => {
-                console.log(res)
+                console.log('addTaskDetail  success:>> ', res)
             })
+            .catch((e) => {
+                console.log('addTaskDetail error :>> ', e)
+            });
 
+    }
+
+    //更新任务
+    public addTask() {
+        const cache = new Cache()
+        const userid = cache.get(Constants.CACHE_KEY.USER_ID)
+        const db = Taro.cloud.database()
+        const userCollection = db.collection('task')
+        userCollection
+            .add({
+                userId: userid,
+                taskStatus: '1',//1-已完成
+                finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
+            })
+            .then(res => {
+                console.log('addTask  success:>> ', res)
+            })
+            .catch((e) => {
+                console.log('addTask error :>> ', e)
+            });
+    }
+
+    //查询是否已经完成过任务
+    public async queryTaskDetailStatus() {
+        const cache = new Cache()
+        const userid = cache.get(Constants.CACHE_KEY.USER_ID)
+        const db = Taro.cloud.database()
+        const userCollection = db.collection('taskDetail')
+        try {
+            const { total } = await userCollection
+                .where({
+                    userid: userid,
+                    taskType: '1',
+                })
+                .count()
+            console.log('queryTaskDetailStatus success total is===>', total)
+            return total > 0
+        } catch (error) {
+            console.log('queryTaskDetailStatus error :>> ', error)
+            throw error
+        }
+    }
+
+    //查询是否已经完成过任务
+    public async queryTaskStatus() {
+        const cache = new Cache()
+        const userid = cache.get(Constants.CACHE_KEY.USER_ID)
+        const db = Taro.cloud.database()
+        const userCollection = db.collection('task')
+        try {
+            const { total } = await userCollection
+                .where({
+                    userid: userid,
+                })
+                .count()
+            console.log('queryTaskStatus success total is===>', total)
+            return total > 0
+        } catch (error) {
+            console.log('queryTaskStatus error :>> ', error)
+            throw error
+        }
     }
 
     //获取水印图片

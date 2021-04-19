@@ -1,7 +1,7 @@
 /**
  *  通用弹窗
  * 
- * @author chenlongfeiceo@gmail.com 2020-02-13
+ * 2020-02-13
 */
 
 import { Component } from 'react'

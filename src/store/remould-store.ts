@@ -2,6 +2,7 @@ import { observable } from 'mobx'
 import Taro from '@tarojs/taro'
 import { Request } from '../core/network'
 import { Cache, Constants, Base64 } from '../core/utils'
+import * as dayjs from 'dayjs'
 
 const remouldStore = observable({
     isShowRuleModal: false,
@@ -74,15 +75,6 @@ const remouldStore = observable({
         const watermarkUrlBase64 = Base64.encode(watermarkUrl, true)
         // this.watermarkImage = picUrl + '?watermark/1/image/' + watermarkUrlBase64 + '/gravity/southeast'
         this.watermarkImage = picUrl + '?watermark/1/image/' + 'aHR0cDovL2V4YW1wbGVzLTEyNTEwMDAwMDQucGljc2gubXlxY2xvdWQuY29tL3NodWl5aW4uanBn' + '/gravity/southeast'
-        // this.watermarkImage = picUrl + '?watermark/2/text/' + Base64.encode('测试', true) + '/gravity/northeast/dx/20/dy/20/batch/1/degree/45'
-
-        console.log('watermarkImage', this.watermarkImage)
-
-        console.log('text', Base64.encode('http://examplebucket-1250000000.cos.ap-shanghai.myqcloud.com/shuiyin_2.png', true))
-
-        // https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/421575839/donate/951.jpg?watermark/1/image/aHR0cHM6Ly82ZTZmLW5vbnByb2ZpdC04ZzExazVqajdhYTczMGY3LTEyNTQ2NDE1NTcudGNiLnFjbG91ZC5sYS93YXRlcm1hcmsucG5n/gravity/southeast
-        // https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/421575839/donate/950.jpg?watermark/1/image/https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/watermark.png/gravity/southeast
-
     },
 
     //通知更新旧物改造任务状态
@@ -94,16 +86,24 @@ const remouldStore = observable({
         const response = await request.post({
         });
     },
+    //调平安接口更新任务状态
+    async addTaskInfo() {
+        const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
 
-    //更新旧物改造任务状态
-    async notifyRemouldTaskStatus() {
         const request = new Request(
-            '',
-            ''
-        );
+            Constants.HOST.HOST_URL,
+            Constants.PATH.GET_SALON_TASKSTATUS
+        )
+
         const response = await request.post({
+            userId: userid,
+            taskName: '旧衣捐赠',
+            taskType: '1',//1-旧衣捐赠 2-旧物改造 3-线下沙龙
+            finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
         });
-    },
+
+        console.log('addTaskInfo:', response)
+    }
 })
 
 export default remouldStore
