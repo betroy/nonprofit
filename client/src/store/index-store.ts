@@ -33,21 +33,36 @@ const indexStore = observable({
       })
   },
 
+  // //查询当前用户任务完成状态
+  // queryTaskStatus() {
+  //   const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
+  //   const db = Taro.cloud.database()
+  //   const userCollection = db.collection('taskDetail')
+  //   const command = db.command
+  //   userCollection
+  //     .where({
+  //       userId: userid
+  //     })
+  //     .get()
+  //     .then(res => {
+  //       console.log('queryTaskStatus:', res)
+  //       this.assembleTaskStatus(res.data)
+  //     })
+  // },
+
   //查询当前用户任务完成状态
   queryTaskStatus() {
     const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
-    const db = Taro.cloud.database()
-    const userCollection = db.collection('taskDetail')
-    const command = db.command
-    userCollection
-      .where({
+    Taro.cloud.callFunction({
+      name: 'get_task_status',
+      data: {
         userId: userid
-      })
-      .get()
-      .then(res => {
+      }
+    })
+      .then((res) => {
         console.log('queryTaskStatus:', res)
-        this.assembleTaskStatus(res.data)
       })
+      .catch(console.error);
   },
 
   assembleTaskStatus(taskList: Array<Object>) {
