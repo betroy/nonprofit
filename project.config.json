@@ -1,5 +1,6 @@
 {
-  "miniprogramRoot": "./dist",
+  "miniprogramRoot": "client/dist/",
+  "cloudfunctionRoot": "cloud/functions/",
   "projectname": "nonprofit",
   "description": "nonprofit",
   "appid": "touristappid",

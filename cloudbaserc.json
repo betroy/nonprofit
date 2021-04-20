@@ -11,10 +11,10 @@
             "client": {
                 "use": "@cloudbase/framework-plugin-website",
                 "inputs": {
-                  "buildCommand": "yarn run build:h5",
-                  "outputPath": "dist"
+                    "buildCommand": "yarn run build:h5",
+                    "outputPath": "dist"
                 }
-              }
+            }
         }
     }
 }
