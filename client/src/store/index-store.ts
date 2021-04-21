@@ -22,7 +22,7 @@ const indexStore = observable({
   //查询完成任务人数
   queryTaskFinishCount() {
     const db = Taro.cloud.database()
-    const userCollection = db.collection('task')
+    const userCollection = db.collection('user')
     userCollection
       .count()
       .then(res => {
@@ -50,6 +50,17 @@ const indexStore = observable({
   //     })
   // },
 
+  // assembleTaskStatus(taskList: Array<Object>) {
+  //   for (const task of taskList) {
+  //     console.log('task===>', task)
+  //     if (Constants.TASK_TYPE.DONATE == task.taskType) {
+  //       this.isFinishDonateTask = true
+  //     } else if (Constants.TASK_TYPE.REMOULD == task.taskType) {
+  //       this.isFinishRemouldTask = true
+  //     }
+  //   }
+  // },
+
   //查询当前用户任务完成状态
   queryTaskStatus() {
     const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
@@ -61,18 +72,19 @@ const indexStore = observable({
     })
       .then((res) => {
         console.log('queryTaskStatus:', res)
+        this.assembleTaskStatus(res.data)
       })
       .catch(console.error);
   },
 
-  assembleTaskStatus(taskList: Array<Object>) {
-    for (const task of taskList) {
-      console.log('task===>', task)
-      if (Constants.TASK_TYPE.DONATE == task.taskType) {
-        this.isFinishDonateTask = true
-      } else if (Constants.TASK_TYPE.REMOULD == task.taskType) {
-        this.isFinishRemouldTask = true
-      }
+  assembleTaskStatus(data: Array<Object>) {
+    for (const user of data) {
+      console.log('user===>', user)
+      // if (Constants.TASK_TYPE.DONATE == task.taskType) {
+      //   this.isFinishDonateTask = true
+      // } else if (Constants.TASK_TYPE.REMOULD == task.taskType) {
+      //   this.isFinishRemouldTask = true
+      // }
     }
   },
 
