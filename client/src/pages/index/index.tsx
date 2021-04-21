@@ -56,7 +56,7 @@ class Index extends Component {
     console.log('componentDidShow')
     this._queryTaskFinishCount()
     this._queryTaskStatus()
-    // this._querySalonTaskStatus()
+    this._querySalonTaskStatus()
   }
 
   componentDidHide() {
