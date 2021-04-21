@@ -83,100 +83,120 @@ class DonateStore {
 
     //更新任务
     public async updateTask() {
-        const isFinish = await this.queryTaskDetailStatus()
-        console.log('updateTask isFinish:', isFinish)
-        if (!isFinish) {
-            this.addTaskDetail()
-        }
-
-        const isDone = await this.queryTaskStatus()
-        console.log('updateTask isDone:', isDone)
-        if (!isDone) {
-            this.addTask()
-        }
-    }
-
-    //更新任务明细
-    public addTaskDetail() {
         const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
-        const db = Taro.cloud.database()
-        const userCollection = db.collection('taskDetail')
-        userCollection
-            .add({
+        Taro.cloud.callFunction({
+            name: 'add_task_info',
+            data: {
                 userId: userid,
-                taskName: '旧衣捐赠',
-                taskType: Constants.TASK_TYPE.DONATE,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
-                finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
+                task: {
+                    taskName: '旧衣捐赠',
+                    taskType: Constants.TASK_TYPE.DONATE,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
+                    finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
+                }
+            }
+        })
+            .then((res) => {
+                console.log('updateTask:', res)
             })
-            .then(res => {
-                console.log('addTaskDetail  success:>> ', res)
-            })
-            .catch((e) => {
-                console.log('addTaskDetail error :>> ', e)
-            });
-
+            .catch(console.error);
     }
 
     //更新任务
-    public addTask() {
-        const cache = new Cache()
-        const userid = cache.get(Constants.CACHE_KEY.USER_ID)
-        const db = Taro.cloud.database()
-        const userCollection = db.collection('task')
-        userCollection
-            .add({
-                userId: userid,
-                taskStatus: '1',//1-已完成
-                finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
-            })
-            .then(res => {
-                console.log('addTask  success:>> ', res)
-            })
-            .catch((e) => {
-                console.log('addTask error :>> ', e)
-            });
-    }
+    // public async updateTask() {
+    //     const isFinish = await this.queryTaskDetailStatus()
+    //     console.log('updateTask isFinish:', isFinish)
+    //     if (!isFinish) {
+    //         this.addTaskDetail()
+    //     }
+
+    //     const isDone = await this.queryTaskStatus()
+    //     console.log('updateTask isDone:', isDone)
+    //     if (!isDone) {
+    //         this.addTask()
+    //     }
+    // }
+
+    //更新任务明细
+    // public addTaskDetail() {
+    //     const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
+    //     const db = Taro.cloud.database()
+    //     const userCollection = db.collection('taskDetail')
+    //     userCollection
+    //         .add({
+    //             userId: userid,
+    //             taskName: '旧衣捐赠',
+    //             taskType: Constants.TASK_TYPE.DONATE,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
+    //             finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
+    //         })
+    //         .then(res => {
+    //             console.log('addTaskDetail  success:>> ', res)
+    //         })
+    //         .catch((e) => {
+    //             console.log('addTaskDetail error :>> ', e)
+    //         });
+
+    // }
+
+    //更新任务
+    // public addTask() {
+    //     const cache = new Cache()
+    //     const userid = cache.get(Constants.CACHE_KEY.USER_ID)
+    //     const db = Taro.cloud.database()
+    //     const userCollection = db.collection('task')
+    //     userCollection
+    //         .add({
+    //             userId: userid,
+    //             taskStatus: '1',//1-已完成
+    //             finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
+    //         })
+    //         .then(res => {
+    //             console.log('addTask  success:>> ', res)
+    //         })
+    //         .catch((e) => {
+    //             console.log('addTask error :>> ', e)
+    //         });
+    // }
 
     //查询是否已经完成过任务
-    public async queryTaskDetailStatus() {
-        const cache = new Cache()
-        const userid = cache.get(Constants.CACHE_KEY.USER_ID)
-        const db = Taro.cloud.database()
-        const userCollection = db.collection('taskDetail')
-        try {
-            const { total } = await userCollection
-                .where({
-                    userId: userid,
-                    taskType: '1',
-                })
-                .count()
-            console.log('queryTaskDetailStatus success total is===>', total)
-            return total > 0
-        } catch (error) {
-            console.log('queryTaskDetailStatus error :>> ', error)
-            throw error
-        }
-    }
+    // public async queryTaskDetailStatus() {
+    //     const cache = new Cache()
+    //     const userid = cache.get(Constants.CACHE_KEY.USER_ID)
+    //     const db = Taro.cloud.database()
+    //     const userCollection = db.collection('taskDetail')
+    //     try {
+    //         const { total } = await userCollection
+    //             .where({
+    //                 userId: userid,
+    //                 taskType: '1',
+    //             })
+    //             .count()
+    //         console.log('queryTaskDetailStatus success total is===>', total)
+    //         return total > 0
+    //     } catch (error) {
+    //         console.log('queryTaskDetailStatus error :>> ', error)
+    //         throw error
+    //     }
+    // }
 
     //查询是否已经完成过任务
-    public async queryTaskStatus() {
-        const cache = new Cache()
-        const userid = cache.get(Constants.CACHE_KEY.USER_ID)
-        const db = Taro.cloud.database()
-        const userCollection = db.collection('task')
-        try {
-            const { total } = await userCollection
-                .where({
-                    userId: userid,
-                })
-                .count()
-            console.log('queryTaskStatus success total is===>', total)
-            return total > 0
-        } catch (error) {
-            console.log('queryTaskStatus error :>> ', error)
-            throw error
-        }
-    }
+    // public async queryTaskStatus() {
+    //     const cache = new Cache()
+    //     const userid = cache.get(Constants.CACHE_KEY.USER_ID)
+    //     const db = Taro.cloud.database()
+    //     const userCollection = db.collection('task')
+    //     try {
+    //         const { total } = await userCollection
+    //             .where({
+    //                 userId: userid,
+    //             })
+    //             .count()
+    //         console.log('queryTaskStatus success total is===>', total)
+    //         return total > 0
+    //     } catch (error) {
+    //         console.log('queryTaskStatus error :>> ', error)
+    //         throw error
+    //     }
+    // }
 
     //获取水印图片
     private getWatermarkImage(fileID: string) {

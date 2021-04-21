@@ -72,19 +72,23 @@ const indexStore = observable({
     })
       .then((res) => {
         console.log('queryTaskStatus:', res)
-        this.assembleTaskStatus(res.data)
+        this.assembleTaskStatus(res.result.data)
       })
       .catch(console.error);
   },
 
   assembleTaskStatus(data: Array<Object>) {
-    for (const user of data) {
-      console.log('user===>', user)
-      // if (Constants.TASK_TYPE.DONATE == task.taskType) {
-      //   this.isFinishDonateTask = true
-      // } else if (Constants.TASK_TYPE.REMOULD == task.taskType) {
-      //   this.isFinishRemouldTask = true
-      // }
+    if (data.length > 0) {
+      const user = data[0]
+      const taskList = user.taskList
+      for (const task of taskList) {
+        console.log('task===>', task)
+        if (Constants.TASK_TYPE.DONATE == task.taskType) {
+          this.isFinishDonateTask = true
+        } else if (Constants.TASK_TYPE.REMOULD == task.taskType) {
+          this.isFinishRemouldTask = true
+        }
+      }
     }
   },
 
