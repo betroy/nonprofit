@@ -106,28 +106,6 @@ const indexStore = observable({
     });
 
     console.log('querySalonTaskStatus:', response)
-
-    this.addTaskInfo()
-  },
-
-
-  //调平安接口更新任务状态
-  async addTaskInfo() {
-    const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
-
-    const request = new Request(
-      Constants.HOST.HOST_URL,
-      Constants.PATH.GET_SALON_TASKSTATUS
-    )
-
-    const response = await request.post({
-      userId: userid,
-      taskName: '旧衣捐赠',
-      taskType: Constants.TASK_TYPE.DONATE,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
-      finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
-    });
-
-    console.log('addTaskInfo:', response)
   },
 
   //保留小程序传递的userid

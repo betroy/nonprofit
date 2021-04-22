@@ -15,17 +15,17 @@ Taro.cloud = cloudbase.init({
     env: "nonprofit-8g11k5jj7aa730f7"
 })
 
-Taro.cloud
-    .auth({
-        persistence: "local"
-    })
-    .anonymousAuthProvider()
-    .signIn()
-    .then((res) => {
-        // 登录成功
-        console.log('res :>> ', res);
-    })
-    .catch((err) => {
-        // 登录失败
-        console.log('err :>> ', err);
-    });
+// Taro.cloud
+//     .auth({
+//         persistence: "local"
+//     })
+//     .anonymousAuthProvider()
+//     .signIn()
+//     .then((res) => {
+//         // 登录成功
+//         console.log('res :>> ', res);
+//     })
+//     .catch((err) => {
+//         // 登录失败
+//         console.log('err :>> ', err);
+//     });
