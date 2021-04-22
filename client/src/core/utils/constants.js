@@ -8,6 +8,8 @@ const IS_DEBUG = true
 const HOST_DEV = 'https://iclient-stg.pingan.com.cn'
 const HOST_RELEASE = 'https://iclient.pingan.com.cn'
 
+const ENV_DEV = 'nonprofit-8g11k5jj7aa730f7'
+const ENV_RELEASE = 'nonprofit-8g11k5jj7aa730f7'
 
 const Constants = {
 
@@ -52,8 +54,12 @@ const Constants = {
     DONATE: '1',
     REMOULD: '2',
     SALON: '3',
-  }
+  },
 
+  //云开发环境ID
+  ENV: {
+    ID: IS_DEBUG ? ENV_DEV : ENV_RELEASE
+  }
 }
 
 module.exports = Constants;

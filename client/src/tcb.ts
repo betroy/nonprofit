@@ -10,22 +10,8 @@ import "@cloudbase/js-sdk/storage";
 // 数据库模块
 import "@cloudbase/js-sdk/database";
 
+import { Constants } from './core/utils'
 
 Taro.cloud = cloudbase.init({
-    env: "nonprofit-8g11k5jj7aa730f7"
+    env: Constants.ENV.ID
 })
-
-// Taro.cloud
-//     .auth({
-//         persistence: "local"
-//     })
-//     .anonymousAuthProvider()
-//     .signIn()
-//     .then((res) => {
-//         // 登录成功
-//         console.log('res :>> ', res);
-//     })
-//     .catch((err) => {
-//         // 登录失败
-//         console.log('err :>> ', err);
-//     });
