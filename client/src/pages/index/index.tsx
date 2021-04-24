@@ -102,50 +102,37 @@ class Index extends Component {
     const { isShowRuleModal, isFinishDonateTask, isFinishRemouldTask, isFinishSalonTask, taskFinishCount, donateBookCount } = this.props.indexStore
     return (
       <View className='index'>
-        <View className='spacebetween'>
-          <View className='back'>
-            <Text className='text'>返回</Text>
-          </View>
-
-          <View className='rule' onClick={() => {
-            this._showModal()
-          }}>
-            <Text className='text'>活动规则</Text>
-          </View>
+        <View className='back'>
+          <Text className='text'>返回</Text>
         </View>
 
-        <Image className='nonprofit-brand' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_nonprofit.png' />
-
-        <Image className='bank-brand' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_bank_brand.png' />
-
-        <Text className='events-time-text'>活动日期：2021.04.22~04.22</Text>
-
-        <View className='image-task-count'>
-          <View className='task-count-wrapper'>
-            <Text className='task-count-label'>完成任务人数</Text>
-            <Text className='task-count-text'>{taskFinishCount}</Text>
-          </View>
-
-          <View className='task-count-wrapper'>
-            <Text className='task-count-label'>已捐出书本</Text>
-            <Text className='task-count-text'>{donateBookCount}</Text>
-          </View>
+        <View className='rule' onClick={() => {
+          this._showModal()
+        }}>
+          <Text className='text'>活动规则</Text>
         </View>
 
-        <View className='task-count-box'>
-          <View className='head-wrapper'>
-            <View className='left-wrapper'>
-              <Image className='tips' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_tips.png' />
-              <Text className='text'>完成任意一个任务即可解锁环保勋章</Text>
+        <View className='index-head-wrapper'>
+          <Image className='iamge-title' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_title.png' />
+          <Image className='image-desc' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_desc.png' />
+        </View>
+
+        <View className='task-box'>
+          <View className='task-count'>
+            <View className='task-count-wrapper'>
+              <Text className='task-count-label'>完成任务人数</Text>
+              <Text className='task-count-text'>{taskFinishCount}</Text>
             </View>
-            <Image className='gift' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_gift.png' onClick={() => {
-              // Taro.navigateTo({
-              //   url: Constants.PAGE.Share,
-              // })
-            }} />
+
+            <View className='task-count-line' />
+
+            <View className='task-count-wrapper'>
+              <Text className='task-count-label'>已捐出书本</Text>
+              <Text className='task-count-text'>{donateBookCount}</Text>
+            </View>
           </View>
 
-          <View className='space-46' />
+          <View className='space-33' />
 
           <View className='item-wrapper'>
             <View className='left-wrapper'>
@@ -200,6 +187,13 @@ class Index extends Component {
             </View>
           </View>
         </View>
+
+        <View className='index_gift_wrapper'>
+          <Image className='image_luckdraw' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_luck_draw.png' />
+          {/* <Image className='image_unluckdraw' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_un_luck_draw.png' /> */}
+        </View>
+
+        <Image className='image-classroom' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_classroom.png' />
 
         {isShowRuleModal &&
           <CommonModal title='活动规则' content='活动规则活动规则活动规则活动规则'

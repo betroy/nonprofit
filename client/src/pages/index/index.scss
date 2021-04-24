@@ -1,20 +1,18 @@
 .index {
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  background-size: 100% 100%;
-  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/bg_index.png);
+  width: 100%;
+  height: 100%;
+  // background-size: 100% 100%;
+  background: #fff4be;
+  // background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/bg_index.png);
 }
 
-.spacebetween {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
 .back {
+  position: absolute;
   width: 98px;
   height: 54px;
+  left: 0px;
   margin-top: 35px;
   background-size: 100% 100%;
   display: flex;
@@ -31,8 +29,10 @@
 }
 
 .rule {
+  position: absolute;
   width: 128px;
   height: 54px;
+  right: 0;
   margin-top: 35px;
   background-size: 100% 100%;
   display: flex;
@@ -47,18 +47,28 @@
     font-weight: 600;
   }
 }
-.nonprofit-brand {
-  width: 251px;
-  height: 50px;
-  margin-top: 23px;
-  margin-left: 41px;
-}
 
-.bank-brand {
-  width: 367px;
-  height: 148px;
-  margin-left: 26px;
-  margin-top: 16px;
+.index-head-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 750px;
+  height: 1042px;
+  background-size: 100% 100%;
+  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/bg_index_head.png);
+
+  .iamge-title {
+    width: 599px;
+    height: 200px;
+    margin-top: 23px;
+    margin-left: 35px;
+  }
+
+  .image-desc {
+    width: 679px;
+    height: 286px;
+    margin-top: 512px;
+    margin-left: 40px;
+  }
 }
 
 .events-time-text {
@@ -70,16 +80,16 @@
   margin-left: 41px;
 }
 
-.image-task-count {
-  z-index: 1;
+.task-count {
   display: flex;
-  width: 698px;
-  height: 225px;
+  width: 602px;
+  height: 180px;
+  background: #fffbe7;
+  border-radius: 12px;
   margin-top: 50px;
   align-self: center;
   flex-direction: row;
-  background-size: 100% 100%;
-  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/bg_index_task_count.png);
+  align-items: center;
 
   .task-count-wrapper {
     display: flex;
@@ -87,30 +97,37 @@
     justify-content: center;
     align-items: center;
     flex: 1;
-  }
-  .task-count-label {
-    font-size: 24px;
-    font-family: PingFang SC;
-    font-weight: 400;
-    color: #000000;
-    opacity: 0.6;
-  }
 
-  .task-count-text {
-    font-size: 48px;
-    font-family: Roboto;
-    font-weight: bold;
-    color: #ff4800;
+    .task-count-label {
+      font-size: 24px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color: #000000;
+      opacity: 0.6;
+    }
+
+    .task-count-text {
+      font-size: 48px;
+      font-family: Roboto;
+      font-weight: bold;
+      color: #ff4800;
+    }
   }
 }
 
-.task-count-box {
+.task-count-line {
+  width: 1px;
+  height: 82px;
+  border: 1px solid #d2c88d;
+  opacity: 0.55;
+}
+
+.task-box {
   display: flex;
   width: 671px;
   height: 802px;
   align-self: center;
   flex-direction: column;
-  margin-top: -60px;
   background-size: 100% 100%;
   background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/bg_index_task_box.png);
 
@@ -148,8 +165,8 @@
     }
   }
 
-  .space-46 {
-    height: 26px;
+  .space-33 {
+    margin-top: 10px;
   }
 
   .item-wrapper {
@@ -157,8 +174,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 37px;
+    margin-right: 37px;
 
     .image {
       width: 140px;
@@ -166,25 +183,25 @@
       margin-top: 25px;
     }
 
-    .title {
-      font-size: 28px;
-      font-family: PingFang SC;
-      font-weight: 600;
-      color: #000001;
-    }
-
-    .desc {
-      font-size: 24px;
-      font-family: PingFang SC;
-      color: #000000;
-      opacity: 0.6;
-      margin-top: 6px;
-    }
-
     .text-wrapper {
       display: flex;
       flex-direction: column;
       margin-left: 20px;
+
+      .title {
+        font-size: 28px;
+        font-family: PingFang SC;
+        font-weight: 600;
+        color: #000001;
+      }
+
+      .desc {
+        font-size: 24px;
+        font-family: PingFang SC;
+        color: #000000;
+        opacity: 0.6;
+        margin-top: 6px;
+      }
     }
 
     .btn-wrapper {
@@ -213,54 +230,40 @@
   }
 }
 
-.head {
+.index_gift_wrapper {
   display: flex;
-  width: 100%;
-  height: 500px;
-  flex-direction: column;
+  width: 692px;
+  height: 701px;
+  align-self: center;
+  flex-direction: row;
+  justify-content: center;
+  background-size: 100% 100%;
+  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/bg_index_gift_box.png);
+  margin-top: 76px;
+
+  .image_luckdraw {
+    width: 528px;
+    height: 214px;
+    margin-top: 105px;
+  }
+
+  .image_luckdraw {
+    width: 518px;
+    height: 192px;
+    margin-top: 105px;
+  }
 }
 
-.body {
+.image-classroom {
   display: flex;
+  width: 699px;
+  height: 1132px;
+  align-self: center;
   flex-direction: column;
-  align-items: center;
-}
-
-.rule {
-  margin-top: 30px;
-  align-self: flex-end;
+  margin-top: 71px;
+  margin-bottom: 219px;
 }
 
 .share {
   align-self: flex-end;
-}
-
-.statistic-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.statistic-text {
-  font-size: 30px;
-}
-
-.head-bottom {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-content: center;
-  margin-top: 250px;
-}
-
-.task-tips {
-  font-size: 35px;
-}
-
-.item-task {
-  display: flex;
-  width: 100%;
-  margin-top: 30px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
