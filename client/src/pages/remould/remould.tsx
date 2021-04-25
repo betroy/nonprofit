@@ -1,5 +1,6 @@
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { Component } from 'react'
-import { View, Button, Text } from '@tarojs/components'
+import { View, Image, Text } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
 
 import { CommonModal } from '../../components'
@@ -9,6 +10,7 @@ import './remould.scss'
 type PageStateProps = {
   remouldStore: {
     navigatorToCourse: Function,
+    takePhoto: Function,
   }
 }
 
@@ -32,34 +34,45 @@ class Remould extends Component {
 
   componentDidHide() { }
 
+  _takePhoto = () => {
+    const { remouldStore } = this.props
+    remouldStore.takePhoto()
+  }
+
   _navigatorToCourse() {
     const { remouldStore } = this.props
     remouldStore.navigatorToCourse()
   }
 
+  _goBack = () => {
+    Taro.navigateBack()
+  }
+
+
   render() {
     // const { remouldStore: { isShowRuleModal } } = this.props
     return (
       <View className='remould' >
-        <Text>选择你想改造的小创意</Text>
-
-        <View className='item-wrapper' onClick={() => {
-          this._navigatorToCourse()
+        <View className='back' onClick={() => {
+          this._goBack()
         }}>
-          <Text>纸杯投影机</Text>
+          <Text className='text'>返回</Text>
         </View>
 
-        <View className='item-wrapper' onClick={() => {
-          this._navigatorToCourse()
-        }}>
-          <Text>矿泉水瓶小飞机</Text>
-        </View>
+        <View className='margin-175' />
 
-        <View className='item-wrapper' onClick={() => {
-          this._navigatorToCourse()
-        }}>
-          <Text>纸板小花瓶</Text>
-        </View>
+        <Image className='image-remould-carton' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_carton.png' />
+
+        <Image className='image-remould-plastic' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_plastic.png' />
+
+        <Image className='image-remould-clothes' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_clothes.png' />
+
+        <Image
+          className='image-remould-takephoto'
+          src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_takephoto.png'
+          onClick={() => {
+            this._takePhoto()
+          }} />
 
       </View>
     )

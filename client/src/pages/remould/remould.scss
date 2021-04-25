@@ -2,14 +2,60 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 750px;
+  height: 1624px;
+  margin-top: -175px;
+  background-size: 100% 100%;
+  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/bg_remould.png);
+
+  .margin-175 {
+    margin-top: 175px;
+  }
+
+  .back {
+    width: 98px;
+    height: 54px;
+    // margin-top: 35px;
+    margin-top: 210px;
+    background-size: 100% 100%;
+    align-self: flex-start;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/common/ic_back.png);
+
+    .text {
+      text-align: center;
+      font-size: 24px;
+      font-family: PingFang SC;
+      color: #ffffff;
+      font-weight: 600;
+    }
+  }
 }
 
-.item-wrapper {
-  display: flex;
-  width: 400px;
-  height: 100px;
-  background: #ccc;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
+.image-remould-carton {
+  width: 614px;
+  height: 197px;
+  // margin-top: 337px;
+  margin-top: 426px;
+}
+
+.image-remould-plastic {
+  width: 615px;
+  height: 207px;
+  margin-top: 14px;
+}
+
+.image-remould-clothes {
+  width: 614px;
+  height: 215px;
+  margin-top: 9px;
+}
+
+.image-remould-takephoto {
+  width: 624px;
+  height: 177px;
+  margin-top: 65px;
 }

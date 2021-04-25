@@ -37,8 +37,8 @@ const remouldStore = observable({
         }).then(res => {
             // get resource ID
             console.log(res)
-            this.navigateToResult()
-            this.getWatermarkImage(res.fileID)
+            // this.navigateToResult()
+            // this.getWatermarkImage(res.fileID)
         }).catch(error => {
             // handle error
             console.log('error :', error);

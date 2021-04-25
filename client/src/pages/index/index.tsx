@@ -165,9 +165,9 @@ class Index extends Component {
 
             <View className='btn-wrapper'
               onClick={() => {
-                // Taro.navigateTo({
-                //   url: Constants.PAGE.Remould
-                // })
+                Taro.navigateTo({
+                  url: Constants.PAGE.Remould
+                })
               }}>
               <Text className='text'>{isFinishRemouldTask ? '已完成' : '去改造'}</Text>
             </View>
