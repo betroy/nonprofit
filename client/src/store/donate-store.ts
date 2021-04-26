@@ -40,7 +40,7 @@ class DonateStore {
             console.log(res)
             // this.getWatermarkImage(res.fileID)
             // this.navigateToResult()
-            this.showDonateModal()
+            // this.showDonateModal()
             //异步更新任务状态
             this.updateTask()
         }).catch(error => {

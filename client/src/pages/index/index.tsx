@@ -45,9 +45,13 @@ class Index extends Component {
     //接收小程序传递过来的参数
     console.log('params', getCurrentInstance().router.params)
     const { userId } = getCurrentInstance().router.params
-    this._saveUserid('421575839')
-    this._queryTaskFinishCount()
-    this._queryTaskStatus()
+    // this._saveUserid('421575839')
+    if (userId != undefined) {
+      this._saveUserid(userId)
+      this._queryTaskFinishCount()
+      this._queryTaskStatus()
+      this._querySalonTaskStatus()
+    }
   }
 
   componentWillUnmount() {
@@ -56,7 +60,6 @@ class Index extends Component {
 
   componentDidShow() {
     console.log('componentDidShow')
-    // this._querySalonTaskStatus()
   }
 
   componentDidHide() {
