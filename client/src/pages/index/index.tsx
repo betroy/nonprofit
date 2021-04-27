@@ -1,9 +1,9 @@
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { Component } from 'react'
-import { View, Button, Text, Image } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
 
-import { CommonModal } from '../../components'
+import { IndexRuleModal } from '../../components'
 import { Constants } from '../../core/utils'
 
 import './index.scss'
@@ -89,7 +89,6 @@ class Index extends Component {
   _showModal = () => {
     const { indexStore } = this.props
     indexStore.showModal()
-    // indexStore.navigateToLogin()
   }
 
   _hideModal = () => {
@@ -105,6 +104,11 @@ class Index extends Component {
     const { isShowRuleModal, isFinishDonateTask, isFinishRemouldTask, isFinishSalonTask, taskFinishCount, donateBookCount } = this.props.indexStore
     return (
       <View className='index'>
+        <View className='index-head-wrapper'>
+          <Image className='iamge-title' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_title.png' />
+          <Image className='image-desc' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_desc.png' />
+        </View>
+
         <View className='back'>
           <Text className='text'>返回</Text>
         </View>
@@ -113,11 +117,6 @@ class Index extends Component {
           this._showModal()
         }}>
           <Text className='text'>活动规则</Text>
-        </View>
-
-        <View className='index-head-wrapper'>
-          <Image className='iamge-title' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_title.png' />
-          <Image className='image-desc' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_desc.png' />
         </View>
 
         <View className='task-box'>
@@ -142,7 +141,7 @@ class Index extends Component {
               <Image className='image' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_donate.png' />
               <View className='text-wrapper'>
                 <Text className='title'>旧衣捐赠</Text>
-                <Text className='desc'>一句话描述任务概要</Text>
+                <Text className='desc'>衣份温暖让世界更美好</Text>
               </View>
             </View>
 
@@ -161,8 +160,8 @@ class Index extends Component {
             <View className='left-wrapper'>
               <Image className='image' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_remould.png' />
               <View className='text-wrapper'>
-                <Text className='title'>旧物改造</Text>
-                <Text className='desc'>什么是旧物改造</Text>
+                <Text className='title'>环保沙龙</Text>
+                <Text className='desc'>线下交流发现更有爱的自己</Text>
               </View>
             </View>
 
@@ -199,11 +198,7 @@ class Index extends Component {
         <Image className='image-classroom' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_classroom.png' />
 
         {isShowRuleModal &&
-          <CommonModal title='活动规则' content='活动规则活动规则活动规则活动规则'
-            onCancelClick={() => {
-            }}
-            onConfirmClick={() => {
-            }}
+          <IndexRuleModal
             onCloseClick={() => {
               this._hideModal()
             }}

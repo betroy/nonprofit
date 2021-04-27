@@ -4,7 +4,7 @@
   width: 100%;
   height: 100%;
   // background-size: 100% 100%;
-  background: #fff4be;
+  background: #fff1af;
   // background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/bg_index.png);
 }
 
@@ -54,6 +54,7 @@
   width: 750px;
   height: 1042px;
   align-self: center;
+  align-items: center;
   background-size: 100% 100%;
   background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/bg_index_head.png);
 
@@ -61,24 +62,13 @@
     width: 599px;
     height: 200px;
     margin-top: 23px;
-    margin-left: 35px;
   }
 
   .image-desc {
     width: 679px;
     height: 286px;
     margin-top: 512px;
-    margin-left: 40px;
   }
-}
-
-.events-time-text {
-  font-family: Yuanti SC;
-  font-size: 22px;
-  font-weight: bold;
-  color: #ffffff;
-  text-shadow: 0px 13px 18px rgba(0, 66, 217, 0.17);
-  margin-left: 41px;
 }
 
 .task-count {
@@ -193,7 +183,7 @@
         font-size: 28px;
         font-family: PingFang SC;
         font-weight: 600;
-        color: #000001;
+        color: #5d371c        ;
       }
 
       .desc {
@@ -209,7 +199,7 @@
       width: 130px;
       height: 54px;
       border-radius: 27px;
-      background: red;
+      background: #FF4800;
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -248,7 +238,7 @@
     margin-top: 105px;
   }
 
-  .image_luckdraw {
+  .image_unluckdraw {
     width: 518px;
     height: 192px;
     margin-top: 105px;

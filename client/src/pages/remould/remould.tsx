@@ -68,8 +68,9 @@ class Remould extends Component {
         <Image className='image-remould-clothes' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_clothes.png' />
 
         <Image
-          className='image-remould-takephoto'
-          src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_takephoto.png'
+          className='image-remould-takephoto' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_takephoto.png' />
+
+        <Image className='image-remould-btn' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_btn.png'
           onClick={() => {
             this._takePhoto()
           }} />
