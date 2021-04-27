@@ -38,9 +38,10 @@ class RemouldCartonCourse extends Component {
   render() {
     return (
       <View className='remould-carton-course'>
-        <Image className='btn-take-photo' onClick={() => {
-          this._takePhoto()
-        }}>拍照上传成果</Image>
+        <Image className='btn-take-photo' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_carton_coursebtn.png'
+          onClick={() => {
+            this._takePhoto()
+          }}>拍照上传成果</Image>
       </View>
     )
   }

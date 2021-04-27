@@ -8,9 +8,9 @@ const remouldStore = observable({
     isShowRuleModal: false,
     watermarkImage: '',
 
-    navigatorToCourse() {
+    navigatorToCartonCourse() {
         Taro.navigateTo({
-            url: Constants.PAGE.RemouldCourse
+            url: Constants.PAGE.RemouldCartonCourse
         })
     },
 

@@ -43,7 +43,7 @@ const Constants = {
     Index: '/pages/index/index',
     Remould: '/pages/remould/remould',
     RemouldResult: '/pages/remould/remould-result',
-    RemouldCourse: '/pages/remould/remould-course',
+    RemouldCartonCourse: '/pages/remould/remould-carton-course',
     Donate: '/pages/donate/donate',
     DonateResult: '/pages/donate/donate-result',
     Share: '/pages/medal/medal',

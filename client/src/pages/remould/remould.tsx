@@ -3,13 +3,11 @@ import { Component } from 'react'
 import { View, Image, Text } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
 
-import { CommonModal } from '../../components'
-
 import './remould.scss'
 
 type PageStateProps = {
   remouldStore: {
-    navigatorToCourse: Function,
+    navigatorToCartonCourse: Function,
     takePhoto: Function,
   }
 }
@@ -39,9 +37,9 @@ class Remould extends Component {
     remouldStore.takePhoto()
   }
 
-  _navigatorToCourse() {
+  _navigatorToCartonCourse() {
     const { remouldStore } = this.props
-    remouldStore.navigatorToCourse()
+    remouldStore.navigatorToCartonCourse()
   }
 
   _goBack = () => {
@@ -61,7 +59,10 @@ class Remould extends Component {
 
         <View className='margin-175' />
 
-        <Image className='image-remould-carton' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_carton.png' />
+        <Image className='image-remould-carton' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_carton.png'
+          onClick={() => {
+            this._navigatorToCartonCourse()
+          }} />
 
         <Image className='image-remould-plastic' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_plastic.png' />
 

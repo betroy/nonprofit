@@ -103,7 +103,7 @@ class Index extends Component {
   render() {
     const { isShowRuleModal, isFinishDonateTask, isFinishRemouldTask, isFinishSalonTask, taskFinishCount, donateBookCount } = this.props.indexStore
     return (
-      <View className='index'>
+      <View className={isShowRuleModal ? 'index-modal' : 'index'}>
         <View className='index-head-wrapper'>
           <Image className='iamge-title' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_title.png' />
           <Image className='image-desc' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_desc.png' />
@@ -160,8 +160,8 @@ class Index extends Component {
             <View className='left-wrapper'>
               <Image className='image' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_remould.png' />
               <View className='text-wrapper'>
-                <Text className='title'>环保沙龙</Text>
-                <Text className='desc'>线下交流发现更有爱的自己</Text>
+                <Text className='title'>变废为宝</Text>
+                <Text className='desc'>让旧物通过创益焕然一新</Text>
               </View>
             </View>
 
@@ -179,8 +179,8 @@ class Index extends Component {
             <View className='left-wrapper'>
               <Image className='image' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_salon.png' />
               <View className='text-wrapper'>
-                <Text className='title'>线下沙龙</Text>
-                <Text className='desc'>什么是线下沙龙</Text>
+                <Text className='title'>环保沙龙</Text>
+                <Text className='desc'>线下交流发现更有爱的自己</Text>
               </View>
             </View>
 

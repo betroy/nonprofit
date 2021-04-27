@@ -1,13 +1,15 @@
 .remould-carton-course {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 750px;
   height: 2265px;
   background-size: 100% 100%;
-  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/bg_remould.png);
+  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/bg_remould_carton_course.png);
 
   .btn-take-photo {
-    width: 524px;
-    height: 102px;
+    width: 652px;
+    height: 157px;
+    margin-top: 2047px;
   }
 }
