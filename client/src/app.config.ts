@@ -5,6 +5,8 @@ export default {
     'pages/donate/donate-result',
     'pages/remould/remould',
     'pages/remould/remould-carton-course',
+    'pages/remould/remould-plastic-course',
+    'pages/remould/remould-clothes-course',
     'pages/remould/remould-result',
     'pages/medal/medal',
   ],

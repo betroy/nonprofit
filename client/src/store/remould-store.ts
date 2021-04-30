@@ -14,6 +14,18 @@ const remouldStore = observable({
         })
     },
 
+    navigatorToPlasticCourse() {
+        Taro.navigateTo({
+            url: Constants.PAGE.RemouldPlasticCourse
+        })
+    },
+
+    navigatorToClothesCourse() {
+        Taro.navigateTo({
+            url: Constants.PAGE.RemouldClothesCourse
+        })
+    },
+
     takePhoto() {
         Taro.chooseImage({
             count: 1,

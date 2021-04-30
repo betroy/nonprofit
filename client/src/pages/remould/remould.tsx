@@ -7,7 +7,9 @@ import './remould.scss'
 
 type PageStateProps = {
   remouldStore: {
+    navigatorToPlasticCourse: Function,
     navigatorToCartonCourse: Function,
+    navigatorToClothesCourse: Function,
     takePhoto: Function,
   }
 }
@@ -42,6 +44,16 @@ class Remould extends Component {
     remouldStore.navigatorToCartonCourse()
   }
 
+  _navigatorToPlasticCourse() {
+    const { remouldStore } = this.props
+    remouldStore.navigatorToPlasticCourse()
+  }
+
+  _navigatorToClothesCourse() {
+    const { remouldStore } = this.props
+    remouldStore.navigatorToClothesCourse()
+  }
+
   _goBack = () => {
     Taro.navigateBack()
   }
@@ -64,9 +76,15 @@ class Remould extends Component {
             this._navigatorToCartonCourse()
           }} />
 
-        <Image className='image-remould-plastic' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_plastic.png' />
+        <Image className='image-remould-plastic' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_plastic.png'
+          onClick={() => {
+            this._navigatorToPlasticCourse()
+          }} />
 
-        <Image className='image-remould-clothes' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_clothes.png' />
+        <Image className='image-remould-clothes' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_clothes.png'
+          onClick={() => {
+            this._navigatorToClothesCourse()
+          }} />
 
         <Image
           className='image-remould-takephoto' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/remould/ic_remould_takephoto.png' />

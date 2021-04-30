@@ -197,6 +197,8 @@ class Index extends Component {
 
         <Image className='image-classroom' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_classroom.png' />
 
+        <Image className='image-bottom-tips' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_bottom_tips.png' />
+
         {isShowRuleModal &&
           <IndexRuleModal
             onCloseClick={() => {

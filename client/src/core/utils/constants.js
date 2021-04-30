@@ -44,6 +44,8 @@ const Constants = {
     Remould: '/pages/remould/remould',
     RemouldResult: '/pages/remould/remould-result',
     RemouldCartonCourse: '/pages/remould/remould-carton-course',
+    RemouldPlasticCourse: '/pages/remould/remould-plastic-course',
+    RemouldClothesCourse: '/pages/remould/remould-clothes-course',
     Donate: '/pages/donate/donate',
     DonateResult: '/pages/donate/donate-result',
     Share: '/pages/medal/medal',

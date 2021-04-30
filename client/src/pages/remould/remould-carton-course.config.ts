@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '旧物改造'
+  navigationBarTitleText: '废旧纸箱改造'
 }
