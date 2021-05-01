@@ -2,7 +2,7 @@ import { Component } from 'react'
 import { View, Button, Text, Image } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
 
-import { CommonModal, Mask } from '../../components'
+import { Mask } from '../../components'
 
 import './medal.scss'
 
@@ -83,26 +83,6 @@ class Medal extends Component {
 
           <Text style='margin-top:30px'>保存分享海报</Text>
         </View>
-
-        {
-          isShowRuleModal &&
-          <CommonModal title='规则' content='分享活动给好友即可参与抽奖'
-            onCancelClick={() => {
-            }}
-            onConfirmClick={() => {
-            }}
-            onCloseClick={() => {
-              this._hideModal()
-            }}
-          />
-        }
-        {
-          isShowShareMask &&
-          <Mask onDismiss={() => {
-            this._hideMask()
-          }}
-          />
-        }
       </View>
     )
   }

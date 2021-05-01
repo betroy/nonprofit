@@ -2,11 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.donate-bg {
   width: 750px;
   height: 1797px;
-  margin-top: -175px;
-  background-size: 100% 100%;
-  background-image: url(https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/bg_donate.png);
+  top: -175px;
+  position: absolute;
+  z-index: -999;
 }
 
 .second-bg {
@@ -92,8 +95,8 @@
 
 .image-donate-tips {
   width: 633px;
-  height: 446px;
-  // margin-top: 65px;
+  height: 396px;
+  margin-top: 564px;
 }
 
 .image-bubble {
@@ -105,7 +108,7 @@
 .image-submit-btn {
   width: 500px;
   height: 100px;
-  margin-top: 1624px;
+  margin-top: 490px;
   // margin-bottom: 74px;
   // position: fixed;
   // bottom: 74px;

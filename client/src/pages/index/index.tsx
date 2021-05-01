@@ -22,7 +22,7 @@ type PageStateProps = {
     queryTaskStatus: Function,
     querySalonTaskStatus: Function,
     saveUserid: Function,
-    navigateToLogin: Function,
+    navigateToLoadPage: Function,
   }
 }
 
@@ -42,16 +42,6 @@ class Index extends Component {
 
   componentDidMount() {
     console.log('componentDidMount')
-    //接收小程序传递过来的参数
-    console.log('params', getCurrentInstance().router.params)
-    const { userId } = getCurrentInstance().router.params
-    // this._saveUserid('421575839')
-    if (userId != undefined) {
-      this._saveUserid(userId)
-      this._queryTaskFinishCount()
-      this._queryTaskStatus()
-      this._querySalonTaskStatus()
-    }
   }
 
   componentWillUnmount() {
@@ -60,6 +50,19 @@ class Index extends Component {
 
   componentDidShow() {
     console.log('componentDidShow')
+
+    //接收小程序传递过来的参数
+    console.log('params', getCurrentInstance().router.params)
+    const { userId, env } = getCurrentInstance().router.params
+
+    if (userId == undefined) {
+      this._navigateToLoadPage()
+    } else {
+      this._saveUserid(userId)
+      this._queryTaskFinishCount()
+      this._queryTaskStatus()
+      // this._querySalonTaskStatus()
+    }
   }
 
   componentDidHide() {
@@ -96,8 +99,9 @@ class Index extends Component {
     indexStore.hideModal()
   }
 
-  _navigateLogin = () => {
+  _navigateToLoadPage = () => {
     const { indexStore } = this.props
+    indexStore.navigateToLoadPage()
   }
 
   render() {
@@ -167,9 +171,10 @@ class Index extends Component {
 
             <View className='btn-wrapper'
               onClick={() => {
-                Taro.navigateTo({
-                  url: Constants.PAGE.Remould
-                })
+                isFinishRemouldTask ? null :
+                  Taro.navigateTo({
+                    url: Constants.PAGE.Remould
+                  })
               }}>
               <Text className='text'>{isFinishRemouldTask ? '已完成' : '去改造'}</Text>
             </View>
@@ -191,8 +196,12 @@ class Index extends Component {
         </View>
 
         <View className='index_gift_wrapper'>
-          <Image className='image_luckdraw' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_luck_draw.png' />
-          {/* <Image className='image_unluckdraw' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_un_luck_draw.png' /> */}
+          {
+            (isFinishDonateTask || isFinishRemouldTask || isFinishSalonTask) ?
+              <Image className='image_luckdraw' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_luck_draw.png' />
+              :
+              <Image className='image_unluckdraw' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_un_luck_draw.png' />
+          }
         </View>
 
         <Image className='image-classroom' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_classroom.png' />

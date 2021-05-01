@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { View, Image, Text } from '@tarojs/components'
+import { View, Image, Text, ScrollView } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
 import Taro from '@tarojs/taro'
 
@@ -26,11 +26,18 @@ interface Donate {
 class Donate extends Component {
   componentWillMount() { }
 
-  componentDidMount() { }
+  componentDidMount() {
+    // Taro.pageScrollTo({
+    //   scrollTop: 0,
+    //   duration: 300
+    // })
+  }
 
   componentWillUnmount() { }
 
-  componentDidShow() { }
+  componentDidShow() {
+
+  }
 
   componentDidHide() { }
 
@@ -52,12 +59,14 @@ class Donate extends Component {
     const { isShowDonateModal } = this.props.donateStore
 
     return (
-      <View className='donate'>
+      <ScrollView className='donate' scrollY >
+        <Image className='donate-bg' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/bg_donate.png' />
         <View className='back' onClick={() => {
           this._goBack()
         }}>
           <Text className='text'>返回</Text>
         </View>
+        <Image className='image-donate-tips' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/ic_donate_tips.png' />
         <Image className='image-submit-btn' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/ic_donate_take_photo_btn.png' onClick={() => {
           this._takePhoto()
         }}>拍照上传我的捐赠时刻</Image>
@@ -66,7 +75,7 @@ class Donate extends Component {
           <DonateResultModal onCloseClick={() => {
             this._hideDonateModal()
           }} />}
-      </View>
+      </ScrollView>
     )
   }
 }

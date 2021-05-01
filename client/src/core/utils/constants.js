@@ -8,6 +8,9 @@ const IS_DEBUG = true
 const HOST_DEV = 'https://iclient-stg.pingan.com.cn'
 const HOST_RELEASE = 'https://iclient.pingan.com.cn'
 
+const H5_HOST_DEV = 'https://test-b-fat.pingan.com.cn'
+const H5_HOST_RELEASE = 'https://b.pingan.com'
+
 const ENV_DEV = 'nonprofit-8g11k5jj7aa730f7'
 const ENV_RELEASE = 'nonprofit-8g11k5jj7aa730f7'
 
@@ -16,6 +19,11 @@ const Constants = {
   /** 服务主机域名 */
   HOST: {
     HOST_URL: IS_DEBUG ? HOST_DEV : HOST_RELEASE,
+  },
+
+  /** 外部H5域名 */
+  H5_HOST: {
+    H5_HOST_URL: IS_DEBUG ? H5_HOST_DEV : H5_HOST_RELEASE,
   },
 
   /** 各种加密密钥 */
@@ -49,6 +57,11 @@ const Constants = {
     Donate: '/pages/donate/donate',
     DonateResult: '/pages/donate/donate-result',
     Share: '/pages/medal/medal',
+  },
+
+  H5_PAGE: {
+    LoadPage: '/branch/mkt/benefit/dist/index.html#/loadpage',
+    DonateSuccess: '/kuaizhan/page/optmng/stationmgmt/20210416/h46905.html?ai_id=kuaizhan_h46905'
   },
 
   // 1-旧衣捐赠 2-旧物改造 3-线下沙龙

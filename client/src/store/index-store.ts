@@ -110,12 +110,15 @@ const indexStore = observable({
 
   //保留小程序传递的userid
   saveUserid(userid: String) {
-    new Cache().set(Constants.CACHE_KEY.USER_ID, userid, true)
+    if (userid != undefined) {
+      new Cache().set(Constants.CACHE_KEY.USER_ID, userid, true)
+    }
   },
 
   //未携带用户标识的url 先跳去登录页
-  navigateToLogin() {
-    window.location.href = 'https://www.runoob.com'
+  navigateToLoadPage() {
+    console.log('navigateToLoadPage')
+    // window.location.href = Constants.H5_HOST.H5_HOST_URL + Constants.H5_PAGE.LoadPage
   },
 
 })

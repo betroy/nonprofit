@@ -40,6 +40,9 @@ const remouldStore = observable({
     },
 
     uploadPhotoFile(tempFile) {
+        Taro.showLoading({
+            title: '上传中',
+        })
         const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
         const tempFileName = tempFile.name
         const cloudPathName = userid + '/remould/' + tempFileName
@@ -47,11 +50,13 @@ const remouldStore = observable({
             cloudPath: cloudPathName,
             filePath: tempFile// 文件路径
         }).then(res => {
+            Taro.hideLoading()
             // get resource ID
             console.log(res)
-            // this.navigateToResult()
-            // this.getWatermarkImage(res.fileID)
+            //异步更新任务状态
+            this.updateTask()
         }).catch(error => {
+            Taro.hideLoading()
             // handle error
             console.log('error :', error);
         })
@@ -115,6 +120,25 @@ const remouldStore = observable({
         });
 
         console.log('addTaskInfo:', response)
+    },
+    //更新任务
+    async updateTask() {
+        const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
+        Taro.cloud.callFunction({
+            name: 'add_task_info',
+            data: {
+                userId: userid,
+                task: {
+                    taskName: '旧物改造',
+                    taskType: Constants.TASK_TYPE.REMOULD,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
+                    finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
+                }
+            }
+        })
+            .then((res) => {
+                console.log('updateTask:', res)
+            })
+            .catch(console.error);
     }
 })
 

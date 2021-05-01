@@ -38,8 +38,7 @@ class DonateStore {
             Taro.hideLoading()
             // get resource ID
             console.log(res)
-            // this.getWatermarkImage(res.fileID)
-            // this.navigateToResult()
+            this.navigateToResult()
             // this.showDonateModal()
             //异步更新任务状态
             this.updateTask()
@@ -51,9 +50,7 @@ class DonateStore {
     }
 
     private navigateToResult() {
-        Taro.navigateTo({
-            url: Constants.PAGE.DonateResult,
-        })
+       window.open(Constants.H5_HOST.H5_HOST_URL+Constants.H5_PAGE.DonateSuccess)
     }
 
     public redirectToIndex() {
