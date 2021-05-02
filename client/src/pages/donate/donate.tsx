@@ -27,10 +27,7 @@ class Donate extends Component {
   componentWillMount() { }
 
   componentDidMount() {
-    // Taro.pageScrollTo({
-    //   scrollTop: 0,
-    //   duration: 300
-    // })
+    window.scrollTo(0,0)
   }
 
   componentWillUnmount() { }

@@ -22,7 +22,9 @@ interface RemouldCartonCourse {
 class RemouldCartonCourse extends Component {
   componentWillMount() { }
 
-  componentDidMount() { }
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
 
   componentWillUnmount() { }
 

@@ -26,7 +26,9 @@ interface Remould {
 class Remould extends Component {
   componentWillMount() { }
 
-  componentDidMount() { }
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
 
   componentWillUnmount() { }
 

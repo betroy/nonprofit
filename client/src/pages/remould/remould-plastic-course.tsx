@@ -22,7 +22,9 @@ interface RemouldPlasticCourse {
 class RemouldPlasticCourse extends Component {
   componentWillMount() { }
 
-  componentDidMount() { }
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
 
   componentWillUnmount() { }
 

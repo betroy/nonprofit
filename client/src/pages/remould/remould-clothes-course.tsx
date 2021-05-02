@@ -22,7 +22,9 @@ interface RemouldClothesCourse {
 class RemouldClothesCourse extends Component {
   componentWillMount() { }
 
-  componentDidMount() { }
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
 
   componentWillUnmount() { }
 
