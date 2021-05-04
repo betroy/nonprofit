@@ -45,7 +45,7 @@ const remouldStore = observable({
         })
         const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
         const tempFileName = tempFile.name
-        const cloudPathName = userid + '/remould/' + tempFileName
+        const cloudPathName = 'user/' + userid + '/remould/' + tempFileName
         Taro.cloud.uploadFile({
             cloudPath: cloudPathName,
             filePath: tempFile// 文件路径

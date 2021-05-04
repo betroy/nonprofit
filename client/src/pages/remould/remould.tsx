@@ -67,9 +67,7 @@ class Remould extends Component {
       <View className='remould' >
         <View className='back' onClick={() => {
           this._goBack()
-        }}>
-          <Text className='text'>返回</Text>
-        </View>
+        }} />
 
         <View className='margin-175' />
 

@@ -30,7 +30,7 @@ class DonateStore {
         })
         const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
         const tempFileName = tempFile.name
-        const cloudPathName = userid + '/donate/' + tempFileName
+        const cloudPathName = 'user/' + userid + '/donate/' + tempFileName
         Taro.cloud.uploadFile({
             cloudPath: cloudPathName,
             filePath: tempFile// 文件路径
@@ -50,7 +50,7 @@ class DonateStore {
     }
 
     private navigateToResult() {
-       window.open(Constants.H5_HOST.H5_HOST_URL+Constants.H5_PAGE.DonateSuccess)
+        window.open(Constants.H5_HOST.H5_HOST_URL + Constants.H5_PAGE.DonateSuccess)
     }
 
     public redirectToIndex() {

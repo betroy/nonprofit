@@ -113,15 +113,11 @@ class Index extends Component {
           <Image className='image-desc' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_desc.png' />
         </View>
 
-        <View className='back'>
-          <Text className='text'>返回</Text>
-        </View>
+        <View className='back' />
 
         <View className='rule' onClick={() => {
           this._showModal()
-        }}>
-          <Text className='text'>活动规则</Text>
-        </View>
+        }} />
 
         <View className='task-box'>
           <View className='task-count'>

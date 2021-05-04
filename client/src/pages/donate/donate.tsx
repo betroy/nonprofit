@@ -27,7 +27,7 @@ class Donate extends Component {
   componentWillMount() { }
 
   componentDidMount() {
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
   }
 
   componentWillUnmount() { }
@@ -60,9 +60,7 @@ class Donate extends Component {
         <Image className='donate-bg' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/bg_donate.png' />
         <View className='back' onClick={() => {
           this._goBack()
-        }}>
-          <Text className='text'>返回</Text>
-        </View>
+        }} />
         <Image className='image-donate-tips' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/ic_donate_tips.png' />
         <Image className='image-submit-btn' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/ic_donate_take_photo_btn.png' onClick={() => {
           this._takePhoto()
