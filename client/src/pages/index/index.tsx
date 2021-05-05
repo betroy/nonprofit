@@ -104,10 +104,21 @@ class Index extends Component {
     indexStore.navigateToLoadPage()
   }
 
+  _handleScroll = (isShowRuleModal) => {
+    if (isShowRuleModal) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'scroll'
+    }
+  }
+
   render() {
     const { isShowRuleModal, isFinishDonateTask, isFinishRemouldTask, isFinishSalonTask, taskFinishCount, donateBookCount } = this.props.indexStore
+
+    this._handleScroll(isShowRuleModal)
+
     return (
-      <View className={isShowRuleModal ? 'index-modal' : 'index'}>
+      <View className='index'>
         <View className='index-head-wrapper'>
           <Image className='iamge-title' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_title.png' />
           <Image className='image-desc' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_desc.png' />
