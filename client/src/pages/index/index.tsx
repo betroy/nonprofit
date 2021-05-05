@@ -61,7 +61,7 @@ class Index extends Component {
       this._saveUserid(userId)
       this._queryTaskFinishCount()
       this._queryTaskStatus()
-      // this._querySalonTaskStatus()
+      this._querySalonTaskStatus()
     }
   }
 
@@ -205,7 +205,12 @@ class Index extends Component {
         <View className='index_gift_wrapper'>
           {
             (isFinishDonateTask || isFinishRemouldTask || isFinishSalonTask) ?
-              <Image className='image_luckdraw' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_luck_draw.png' />
+              <Image className='image_luckdraw' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_luck_draw.png'
+                onClick={() => {
+                  // Taro.navigateTo({
+                  //   url: Constants.PAGE.Donate
+                  // })
+                }} />
               :
               <Image className='image_unluckdraw' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_un_luck_draw.png' />
           }

@@ -101,11 +101,22 @@ const indexStore = observable({
       Constants.PATH.GET_SALON_TASKSTATUS
     )
 
-    const response = await request.post({
-      userId: userid
-    });
+    try {
+      const response = await request.post({
+        userId: userid
+      });
+      if (response.returnData &&
+        response.returnData.finishStatus == '1') {
+        this.isFinishSalonTask = true
+      } else {
+        this.isFinishSalonTask = false
+      }
 
-    console.log('querySalonTaskStatus:', response)
+      console.log('querySalonTaskStatus success :>>', response)
+    } catch (error) {
+      console.log('querySalonTaskStatus error :>> ', error)
+      throw error
+    }
   },
 
   //保留小程序传递的userid
@@ -117,7 +128,6 @@ const indexStore = observable({
 
   //未携带用户标识的url 先跳去登录页
   navigateToLoadPage() {
-    console.log('navigateToLoadPage')
     // window.location.href = Constants.H5_HOST.H5_HOST_URL + Constants.H5_PAGE.LoadPage
   },
 

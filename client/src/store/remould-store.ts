@@ -28,38 +28,39 @@ const remouldStore = observable({
 
     takePhoto() {
         Taro.chooseImage({
-            count: 1,
+            count: 9, // 默认9
             sourceType: ['camera'],
         }).then(res => {
             console.log('success:', res)
-            this.image = res.tempFilePaths[0]
-            this.uploadPhotoFile(res.tempFiles[0].originalFileObj)
+            this.uploadPhotoFile(res.tempFiles)
         }).catch(error => {
             console.log('error :', error);
         })
     },
 
-    uploadPhotoFile(tempFile) {
+    async uploadPhotoFile(tempFiles) {
         Taro.showLoading({
             title: '上传中',
         })
         const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
-        const tempFileName = tempFile.name
-        const cloudPathName = 'user/' + userid + '/remould/' + tempFileName
-        Taro.cloud.uploadFile({
-            cloudPath: cloudPathName,
-            filePath: tempFile// 文件路径
-        }).then(res => {
-            Taro.hideLoading()
-            // get resource ID
-            console.log(res)
+        try {
+            for (const tempFile of tempFiles) {
+                const tempFileName = tempFile.originalFileObj.name
+                const cloudPathName = 'user/' + userid + '/remould/' + tempFileName
+                const res = await Taro.cloud.uploadFile({
+                    cloudPath: cloudPathName,
+                    filePath: tempFile.originalFileObj// 文件路径
+                })
+                console.log('uploadPhotoFile success :>>', res)
+            }
             //异步更新任务状态
-            this.updateTask()
-        }).catch(error => {
+            // this.updateTask()
+            this.addTaskInfo()
+        } catch (error) {
             Taro.hideLoading()
-            // handle error
-            console.log('error :', error);
-        })
+            console.log('uploadPhotoFile error :>> ', error)
+            throw error
+        }
     },
 
     navigateToResult() {
@@ -75,34 +76,25 @@ const remouldStore = observable({
     },
 
     //获取水印图片
-    getWatermarkImage(fileID: string) {
-        const fileList = [fileID, 'cloud://nonprofit-8g11k5jj7aa730f7.6e6f-nonprofit-8g11k5jj7aa730f7-1254641557/watermark.png']
-        Taro.cloud.getTempFileURL({
-            fileList: fileList
-        }).then((res) => {
-            console.log('res===>', res)
-            this.convertWatermarkUrl(res.fileList)
-        })
+    // getWatermarkImage(fileID: string) {
+    //     const fileList = [fileID, 'cloud://nonprofit-8g11k5jj7aa730f7.6e6f-nonprofit-8g11k5jj7aa730f7-1254641557/watermark.png']
+    //     Taro.cloud.getTempFileURL({
+    //         fileList: fileList
+    //     }).then((res) => {
+    //         console.log('res===>', res)
+    //         this.convertWatermarkUrl(res.fileList)
+    //     })
 
-    },
+    // },
 
-    convertWatermarkUrl(fileList: Array<object>) {
-        const picUrl = fileList[0].tempFileURL
-        const watermarkUrl: string = fileList[1].tempFileURL
-        const watermarkUrlBase64 = Base64.encode(watermarkUrl, true)
-        // this.watermarkImage = picUrl + '?watermark/1/image/' + watermarkUrlBase64 + '/gravity/southeast'
-        this.watermarkImage = picUrl + '?watermark/1/image/' + 'aHR0cDovL2V4YW1wbGVzLTEyNTEwMDAwMDQucGljc2gubXlxY2xvdWQuY29tL3NodWl5aW4uanBn' + '/gravity/southeast'
-    },
+    // convertWatermarkUrl(fileList: Array<object>) {
+    //     const picUrl = fileList[0].tempFileURL
+    //     const watermarkUrl: string = fileList[1].tempFileURL
+    //     const watermarkUrlBase64 = Base64.encode(watermarkUrl, true)
+    //     // this.watermarkImage = picUrl + '?watermark/1/image/' + watermarkUrlBase64 + '/gravity/southeast'
+    //     this.watermarkImage = picUrl + '?watermark/1/image/' + 'aHR0cDovL2V4YW1wbGVzLTEyNTEwMDAwMDQucGljc2gubXlxY2xvdWQuY29tL3NodWl5aW4uanBn' + '/gravity/southeast'
+    // },
 
-    //通知更新旧物改造任务状态
-    async updateRemouldTaskStatus() {
-        const request = new Request(
-            '',
-            ''
-        );
-        const response = await request.post({
-        });
-    },
     //调平安接口更新任务状态
     async addTaskInfo() {
         const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
@@ -112,33 +104,45 @@ const remouldStore = observable({
             Constants.PATH.GET_SALON_TASKSTATUS
         )
 
-        const response = await request.post({
-            userId: userid,
-            taskName: '旧衣捐赠',
-            taskType: '1',//1-旧衣捐赠 2-旧物改造 3-线下沙龙
-            finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
-        });
+        try {
+            const response = await request.post({
+                userId: userid,
+                taskName: '旧物改造',
+                taskType: Constants.TASK_TYPE.REMOULD,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
+                finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
+            });
+            console.log('addTaskInfo success :>>', response)
 
-        console.log('addTaskInfo:', response)
+            this.updateTask()
+        } catch (error) {
+            Taro.hideLoading()
+            console.log('addTaskInfo error :>> ', error)
+            throw error
+        }
     },
     //更新任务
     async updateTask() {
         const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
-        Taro.cloud.callFunction({
-            name: 'add_task_info',
-            data: {
-                userId: userid,
-                task: {
-                    taskName: '旧物改造',
-                    taskType: Constants.TASK_TYPE.REMOULD,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
-                    finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
+        try {
+            const response = await Taro.cloud.callFunction({
+                name: 'add_task_info',
+                data: {
+                    userId: userid,
+                    task: {
+                        taskName: '旧物改造',
+                        taskType: Constants.TASK_TYPE.REMOULD,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
+                        finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
+                    }
                 }
-            }
-        })
-            .then((res) => {
-                console.log('updateTask:', res)
             })
-            .catch(console.error);
+            Taro.hideLoading()
+            console.log('updateTask success :>>', response)
+            // this.navigateToResult()
+        } catch (error) {
+            Taro.hideLoading()
+            console.log('updateTask error :>> ', error)
+            throw error
+        }
     }
 })
 
