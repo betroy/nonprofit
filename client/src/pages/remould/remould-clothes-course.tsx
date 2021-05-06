@@ -1,3 +1,4 @@
+import { getCurrentInstance } from '@tarojs/taro'
 import { Component } from 'react'
 import { View, Image, Text, Button } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
@@ -7,6 +8,9 @@ import './remould-clothes-course.scss'
 type PageStateProps = {
   remouldStore: {
     takePhoto: Function,
+    navigateToLoadPage: Function,
+    setEnv: Function,
+    setUserid: Function,
   }
 }
 
@@ -24,6 +28,20 @@ class RemouldClothesCourse extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
+
+    //接收小程序传递过来的参数
+    console.log('params', getCurrentInstance().router.params)
+    const { userId, env } = getCurrentInstance().router.params
+
+    if (userId == undefined) {
+      this._navigateToLoadPage()
+    } else {
+      this._setUserid(userId)
+    }
+
+    if (env != undefined) {
+      this._setEnv(env)
+    }
   }
 
   componentWillUnmount() { }
@@ -35,6 +53,21 @@ class RemouldClothesCourse extends Component {
   _takePhoto = () => {
     const { remouldStore } = this.props
     remouldStore.takePhoto()
+  }
+
+  _navigateToLoadPage = () => {
+    const { remouldStore } = this.props
+    remouldStore.navigateToLoadPage()
+  }
+
+  _setEnv(env: string) {
+    const { remouldStore } = this.props
+    remouldStore.setEnv(env)
+  }
+
+  _setUserid(userid: string) {
+    const { remouldStore } = this.props
+    remouldStore.setUserid(userid)
   }
 
   render() {

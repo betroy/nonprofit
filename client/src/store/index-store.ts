@@ -10,6 +10,8 @@ const indexStore = observable({
   isFinishDonateTask: false,  //是否完成旧衣捐赠任务
   isFinishRemouldTask: false, //是否完成旧物改造任务
   isFinishSalonTask: false, //是否完成线下沙龙任务
+  userid: '', //userId
+  evn: Constants.ENV,
 
   showModal() {
     this.isShowRuleModal = true
@@ -63,11 +65,10 @@ const indexStore = observable({
 
   //查询当前用户任务完成状态
   queryTaskStatus() {
-    const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
     Taro.cloud.callFunction({
       name: 'get_task_status',
       data: {
-        userId: userid
+        userId: this.userid
       }
     })
       .then((res) => {
@@ -94,16 +95,16 @@ const indexStore = observable({
 
   //查询线下沙龙任务完成状态
   async querySalonTaskStatus() {
-    const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
+    const URL = '0' == this.env ? Constants.HOST.DEV : Constants.HOST.RELEASE
 
     const request = new Request(
-      Constants.HOST.HOST_URL,
+      URL,
       Constants.PATH.GET_SALON_TASKSTATUS
     )
 
     try {
       const response = await request.post({
-        userId: userid
+        userId: this.userid
       });
       if (response.returnData &&
         response.returnData.finishStatus == '1') {
@@ -120,17 +121,41 @@ const indexStore = observable({
   },
 
   //保留小程序传递的userid
-  saveUserid(userid: String) {
-    if (userid != undefined) {
-      new Cache().set(Constants.CACHE_KEY.USER_ID, userid, true)
+  setUserid(userid: String) {
+    this.userid = userid
+  },
+
+  //设置env
+  setEnv(env: String) {
+    if (env != undefined) {
+      this.env = env
     }
   },
 
   //未携带用户标识的url 先跳去登录页
   navigateToLoadPage() {
-    // window.location.href = Constants.H5_HOST.H5_HOST_URL + Constants.H5_PAGE.LoadPage
+    const URL = '0' == this.env ? Constants.H5_HOST.DEV : Constants.H5_HOST.RELEASE
+
+    window.location.href = URL + Constants.H5_PAGE.LoadPage
   },
 
+  navigateToDonate() {
+    Taro.navigateTo({
+      url: Constants.PAGE.Donate + '?userId=' + this.userid + '&env=' + this.env
+    })
+  },
+
+  navigateToRemould() {
+    Taro.navigateTo({
+      url: Constants.PAGE.Remould + '?userId=' + this.userid + '&env=' + this.env
+    })
+  },
+
+  navigateToSalon() {
+    const URL = '0' == this.env ? Constants.H5_HOST.DEV : Constants.H5_HOST.RELEASE
+
+    window.location.href = URL + Constants.H5_PAGE.SalonPage
+  },
 })
 
 export default indexStore

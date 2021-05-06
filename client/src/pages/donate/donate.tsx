@@ -1,7 +1,7 @@
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { Component } from 'react'
 import { View, Image, Text, ScrollView } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
-import Taro from '@tarojs/taro'
 
 import { DonateResultModal } from '../../components'
 
@@ -11,6 +11,9 @@ type PageStateProps = {
   donateStore: {
     takePhoto: Function,
     hideDonateModal: Function,
+    navigateToLoadPage: Function,
+    setEnv: Function,
+    setUserid: Function,
   }
 }
 
@@ -28,13 +31,25 @@ class Donate extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
+
+    //接收小程序传递过来的参数
+    console.log('params', getCurrentInstance().router.params)
+    const { userId, env } = getCurrentInstance().router.params
+
+    if (userId == undefined) {
+      this._navigateToLoadPage()
+    } else {
+      this._setUserid(userId)
+    }
+
+    if (env != undefined) {
+      this._setEnv(env)
+    }
   }
 
   componentWillUnmount() { }
 
-  componentDidShow() {
-
-  }
+  componentDidShow() { }
 
   componentDidHide() { }
 
@@ -50,6 +65,21 @@ class Donate extends Component {
   _hideDonateModal = () => {
     const { donateStore } = this.props
     donateStore.hideDonateModal()
+  }
+
+  _navigateToLoadPage = () => {
+    const { donateStore } = this.props
+    donateStore.navigateToLoadPage()
+  }
+
+  _setEnv(env: string) {
+    const { donateStore } = this.props
+    donateStore.setEnv(env)
+  }
+
+  _setUserid(userid: string) {
+    const { donateStore } = this.props
+    donateStore.setUserid(userid)
   }
 
   render() {

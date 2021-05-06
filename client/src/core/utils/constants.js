@@ -2,6 +2,7 @@
  * 常量
  */
 
+const ENV = '1' //0--测试环境  1--生产环境
 
 const IS_DEBUG = true
 
@@ -18,12 +19,16 @@ const Constants = {
 
   /** 服务主机域名 */
   HOST: {
-    HOST_URL: IS_DEBUG ? HOST_DEV : HOST_RELEASE,
+    // HOST_URL: IS_DEBUG ? HOST_DEV : HOST_RELEASE,
+    DEV: HOST_DEV,
+    RELEASE: HOST_RELEASE,
   },
 
   /** 外部H5域名 */
   H5_HOST: {
-    H5_HOST_URL: IS_DEBUG ? H5_HOST_DEV : H5_HOST_RELEASE,
+    // H5_HOST_URL: IS_DEBUG ? H5_HOST_DEV : H5_HOST_RELEASE,
+    DEV: H5_HOST_DEV,
+    RELEASE: H5_HOST_RELEASE,
   },
 
   /** 各种加密密钥 */
@@ -40,6 +45,9 @@ const Constants = {
   CACHE_KEY: {
     /** 用户ID */
     USER_ID: 'userid',
+
+    /** env */
+    ENV: 'env',
   },
 
   // 广播 event key
@@ -61,7 +69,9 @@ const Constants = {
 
   H5_PAGE: {
     LoadPage: '/branch/mkt/benefit/dist/index.html#/loadpage',
-    DonateSuccess: '/kuaizhan/page/optmng/stationmgmt/20210416/h46905.html?ai_id=kuaizhan_h46905'
+    TaskSuccess: '/kuaizhan/page/optmng/stationmgmt/20210416/h46905.html?ai_id=kuaizhan_h46905',
+    SharePage: '/kuaizhan/page/optmng/stationmgmt/20210506/h47867.html?ai_id=kuaizhan_h47867',
+    SalonPage: '/branch/mkt/receptionroom/salon/index.html#/activityList?default=002&orgId=0800&subjectTag=低碳创益营'
   },
 
   // 1-旧衣捐赠 2-旧物改造 3-线下沙龙

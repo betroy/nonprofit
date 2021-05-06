@@ -10,7 +10,10 @@ type PageStateProps = {
     navigatorToPlasticCourse: Function,
     navigatorToCartonCourse: Function,
     navigatorToClothesCourse: Function,
+    navigateToLoadPage: Function,
     takePhoto: Function,
+    setEnv: Function,
+    setUserid: Function,
   }
 }
 
@@ -28,6 +31,20 @@ class Remould extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
+
+    //接收小程序传递过来的参数
+    console.log('params', getCurrentInstance().router.params)
+    const { userId, env } = getCurrentInstance().router.params
+
+    if (userId == undefined) {
+      this._navigateToLoadPage()
+    } else {
+      this._setUserid(userId)
+    }
+
+    if (env != undefined) {
+      this._setEnv(env)
+    }
   }
 
   componentWillUnmount() { }
@@ -54,6 +71,21 @@ class Remould extends Component {
   _navigatorToClothesCourse() {
     const { remouldStore } = this.props
     remouldStore.navigatorToClothesCourse()
+  }
+
+  _navigateToLoadPage = () => {
+    const { remouldStore } = this.props
+    remouldStore.navigateToLoadPage()
+  }
+
+  _setEnv(env: string) {
+    const { remouldStore } = this.props
+    remouldStore.setEnv(env)
+  }
+
+  _setUserid(userid: string) {
+    const { remouldStore } = this.props
+    remouldStore.setUserid(userid)
   }
 
   _goBack = () => {

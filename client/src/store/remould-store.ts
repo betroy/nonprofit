@@ -7,23 +7,44 @@ import * as dayjs from 'dayjs'
 const remouldStore = observable({
     isShowRuleModal: false,
     watermarkImage: '',
+    userid: '', //userId
+    evn: Constants.ENV,
 
     navigatorToCartonCourse() {
         Taro.navigateTo({
-            url: Constants.PAGE.RemouldCartonCourse
+            url: Constants.PAGE.RemouldCartonCourse + '?userId=' + this.userid + '&env=' + this.env
         })
     },
 
     navigatorToPlasticCourse() {
         Taro.navigateTo({
-            url: Constants.PAGE.RemouldPlasticCourse
+            url: Constants.PAGE.RemouldPlasticCourse + '?userId=' + this.userid + '&env=' + this.env
         })
     },
 
     navigatorToClothesCourse() {
         Taro.navigateTo({
-            url: Constants.PAGE.RemouldClothesCourse
+            url: Constants.PAGE.RemouldClothesCourse + '?userId=' + this.userid + '&env=' + this.env
         })
+    },
+
+    //未携带用户标识的url 先跳去登录页
+    navigateToLoadPage() {
+        const URL = '0' == this.env ? Constants.H5_HOST.DEV : Constants.H5_HOST.RELEASE
+
+        window.location.href = URL + Constants.H5_PAGE.LoadPage
+    },
+
+    //设置env
+    setEnv(env: string) {
+        if (env != undefined) {
+            this.env = env
+        }
+    },
+
+    //保留小程序传递的userid
+    setUserid(userid: string) {
+        this.userid = userid
     },
 
     takePhoto() {
@@ -42,11 +63,10 @@ const remouldStore = observable({
         Taro.showLoading({
             title: '上传中',
         })
-        const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
         try {
             for (const tempFile of tempFiles) {
                 const tempFileName = tempFile.originalFileObj.name
-                const cloudPathName = 'user/' + userid + '/remould/' + tempFileName
+                const cloudPathName = 'user/' + this.userid + '/remould/' + tempFileName
                 const res = await Taro.cloud.uploadFile({
                     cloudPath: cloudPathName,
                     filePath: tempFile.originalFileObj// 文件路径
@@ -64,9 +84,9 @@ const remouldStore = observable({
     },
 
     navigateToResult() {
-        Taro.navigateTo({
-            url: Constants.PAGE.RemouldResult,
-        })
+        const URL = '0' == this.env ? Constants.H5_HOST.DEV : Constants.H5_HOST.RELEASE
+
+        window.location.href = URL + Constants.H5_PAGE.TaskSuccess
     },
 
     redirectToIndex() {
@@ -97,23 +117,27 @@ const remouldStore = observable({
 
     //调平安接口更新任务状态
     async addTaskInfo() {
-        const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
+        const URL = '0' == this.env ? Constants.HOST.DEV : Constants.HOST.RELEASE
 
         const request = new Request(
-            Constants.HOST.HOST_URL,
+            URL,
             Constants.PATH.GET_SALON_TASKSTATUS
         )
 
         try {
             const response = await request.post({
-                userId: userid,
+                userId: this.userid,
                 taskName: '旧物改造',
                 taskType: Constants.TASK_TYPE.REMOULD,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
                 finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
             });
             console.log('addTaskInfo success :>>', response)
 
-            this.updateTask()
+            if (response && response.returnCode == '0000') {
+                this.updateTask()
+            } else {
+                Taro.hideLoading()
+            }
         } catch (error) {
             Taro.hideLoading()
             console.log('addTaskInfo error :>> ', error)
@@ -122,12 +146,11 @@ const remouldStore = observable({
     },
     //更新任务
     async updateTask() {
-        const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
         try {
             const response = await Taro.cloud.callFunction({
                 name: 'add_task_info',
                 data: {
-                    userId: userid,
+                    userId: this.userid,
                     task: {
                         taskName: '旧物改造',
                         taskType: Constants.TASK_TYPE.REMOULD,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
@@ -137,7 +160,7 @@ const remouldStore = observable({
             })
             Taro.hideLoading()
             console.log('updateTask success :>>', response)
-            // this.navigateToResult()
+            this.navigateToResult()
         } catch (error) {
             Taro.hideLoading()
             console.log('updateTask error :>> ', error)

@@ -10,6 +10,9 @@ class DonateStore {
     @observable
     isShowDonateModal = false
 
+    userid: string = ''//userId
+    evn = Constants.ENV //env
+
     @action
     public takePhoto() {
         Taro.chooseImage({
@@ -29,11 +32,10 @@ class DonateStore {
             title: '上传中',
         })
 
-        const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
         try {
             for (const tempFile of tempFiles) {
                 const tempFileName = tempFile.originalFileObj.name
-                const cloudPathName = 'user/' + userid + '/donate/' + tempFileName
+                const cloudPathName = 'user/' + this.userid + '/donate/' + tempFileName
                 const res = await Taro.cloud.uploadFile({
                     cloudPath: cloudPathName,
                     filePath: tempFile.originalFileObj// 文件路径
@@ -51,7 +53,9 @@ class DonateStore {
     }
 
     private navigateToResult() {
-        window.location.href = Constants.H5_HOST.H5_HOST_URL + Constants.H5_PAGE.DonateSuccess
+        const URL = '0' == this.env ? Constants.H5_HOST.DEV : Constants.H5_HOST.RELEASE
+
+        window.location.href = URL + Constants.H5_PAGE.TaskSuccess
     }
 
     public redirectToIndex() {
@@ -60,25 +64,48 @@ class DonateStore {
         })
     }
 
+    //未携带用户标识的url 先跳去登录页
+    public navigateToLoadPage() {
+        const URL = '0' == this.env ? Constants.H5_HOST.DEV : Constants.H5_HOST.RELEASE
+
+        window.location.href = URL + Constants.H5_PAGE.LoadPage
+    }
+
+    //设置env
+    setEnv(env: string) {
+        if (env != undefined) {
+            this.env = env
+        }
+    }
+
+    //保留小程序传递的userid
+    setUserid(userid: string) {
+        this.userid = userid
+    }
+
     //调平安接口更新任务状态
     public async addTaskInfo() {
-        const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
+        const URL = '0' == this.env ? Constants.HOST.DEV : Constants.HOST.RELEASE
 
         const request = new Request(
-            Constants.HOST.HOST_URL,
+            URL,
             Constants.PATH.GET_SALON_TASKSTATUS
         )
 
         try {
             const response = await request.post({
-                userId: userid,
+                userId: this.userid,
                 taskName: '旧衣捐赠',
                 taskType: Constants.TASK_TYPE.DONATE,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
                 finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
             });
             console.log('addTaskInfo success :>>', response)
 
-            this.updateTask()
+            if (response && response.returnCode == '0000') {
+                this.updateTask()
+            } else {
+                Taro.hideLoading()
+            }
         } catch (error) {
             Taro.hideLoading()
             console.log('addTaskInfo error :>> ', error)
@@ -89,12 +116,11 @@ class DonateStore {
 
     //更新任务
     public async updateTask() {
-        const userid = new Cache().get(Constants.CACHE_KEY.USER_ID)
         try {
             const response = await Taro.cloud.callFunction({
                 name: 'add_task_info',
                 data: {
-                    userId: userid,
+                    userId: this.userid,
                     task: {
                         taskName: '旧衣捐赠',
                         taskType: Constants.TASK_TYPE.DONATE,//1-旧衣捐赠 2-旧物改造 3-线下沙龙
@@ -104,7 +130,7 @@ class DonateStore {
             })
             Taro.hideLoading()
             console.log('updateTask success :>>', response)
-            // this.navigateToResult()
+            this.navigateToResult()
         } catch (error) {
             Taro.hideLoading()
             console.log('updateTask error :>> ', error)

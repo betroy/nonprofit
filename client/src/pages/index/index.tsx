@@ -7,6 +7,7 @@ import { IndexRuleModal } from '../../components'
 import { Constants } from '../../core/utils'
 
 import './index.scss'
+import { _allowStateChangesInsideComputed } from 'mobx'
 
 type PageStateProps = {
   indexStore: {
@@ -21,8 +22,12 @@ type PageStateProps = {
     queryTaskFinishCount: Function,
     queryTaskStatus: Function,
     querySalonTaskStatus: Function,
-    saveUserid: Function,
+    setUserid: Function,
+    setEnv: Function,
     navigateToLoadPage: Function,
+    navigateToDonate: Function,
+    navigateToRemould: Function,
+    navigateToSalon: Function,
   }
 }
 
@@ -58,7 +63,8 @@ class Index extends Component {
     if (userId == undefined) {
       this._navigateToLoadPage()
     } else {
-      this._saveUserid(userId)
+      this._setUserid(userId)
+      this._setEnv(env)
       this._queryTaskFinishCount()
       this._queryTaskStatus()
       this._querySalonTaskStatus()
@@ -84,9 +90,14 @@ class Index extends Component {
     indexStore.querySalonTaskStatus()
   }
 
-  _saveUserid(userid: string) {
+  _setUserid(userid: string) {
     const { indexStore } = this.props
-    indexStore.saveUserid(userid)
+    indexStore.setUserid(userid)
+  }
+
+  _setEnv(env: string) {
+    const { indexStore } = this.props
+    indexStore.setEnv(env)
   }
 
   _showModal = () => {
@@ -102,6 +113,21 @@ class Index extends Component {
   _navigateToLoadPage = () => {
     const { indexStore } = this.props
     indexStore.navigateToLoadPage()
+  }
+
+  _navigateToDonate = () => {
+    const { indexStore } = this.props
+    indexStore.navigateToDonate()
+  }
+
+  _navigateToRemould = () => {
+    const { indexStore } = this.props
+    indexStore.navigateToRemould()
+  }
+
+  _navigateToSalon = () => {
+    const { indexStore } = this.props
+    indexStore.navigateToSalon()
   }
 
   _handleScroll = (isShowRuleModal) => {
@@ -159,9 +185,7 @@ class Index extends Component {
             <View className='btn-wrapper'
               onClick={() => {
                 isFinishDonateTask ? null :
-                  Taro.navigateTo({
-                    url: Constants.PAGE.Donate
-                  })
+                  this._navigateToDonate()
               }}>
               <Text className='text'>{isFinishDonateTask ? '已完成' : '去捐赠'}</Text>
             </View>
@@ -179,9 +203,7 @@ class Index extends Component {
             <View className='btn-wrapper'
               onClick={() => {
                 isFinishRemouldTask ? null :
-                  Taro.navigateTo({
-                    url: Constants.PAGE.Remould
-                  })
+                  this._navigateToRemould()
               }}>
               <Text className='text'>{isFinishRemouldTask ? '已完成' : '去改造'}</Text>
             </View>
@@ -196,7 +218,11 @@ class Index extends Component {
               </View>
             </View>
 
-            <View className='btn-wrapper'>
+            <View className='btn-wrapper'
+              onClick={() => {
+                isFinishRemouldTask ? null :
+                  this._navigateToSalon()
+              }}>
               <Text className='text'>{isFinishSalonTask ? '已完成' : '去参加'}</Text>
             </View>
           </View>
@@ -207,9 +233,9 @@ class Index extends Component {
             (isFinishDonateTask || isFinishRemouldTask || isFinishSalonTask) ?
               <Image className='image_luckdraw' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_luck_draw.png'
                 onClick={() => {
-                  // Taro.navigateTo({
-                  //   url: Constants.PAGE.Donate
-                  // })
+                  Taro.navigateTo({
+                    url: Constants.PAGE.SharePage
+                  })
                 }} />
               :
               <Image className='image_unluckdraw' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_un_luck_draw.png' />
