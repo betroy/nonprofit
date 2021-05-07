@@ -10,7 +10,7 @@ const HOST_DEV = 'https://iclient-stg.pingan.com.cn'
 const HOST_RELEASE = 'https://iclient.pingan.com.cn'
 
 const H5_HOST_DEV = 'https://test-b-fat.pingan.com.cn'
-const H5_HOST_RELEASE = 'https://b.pingan.com'
+const H5_HOST_RELEASE = 'https://b.pingan.com.cn'
 
 const ENV_DEV = 'nonprofit-8g11k5jj7aa730f7'
 const ENV_RELEASE = 'nonprofit-8g11k5jj7aa730f7'

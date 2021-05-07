@@ -100,8 +100,7 @@ class DonateStore {
                 finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
             });
             console.log('addTaskInfo success :>>', response)
-
-            if (response && response.returnCode == '0000') {
+            if (response && response.data.returnCode == '0000') {
                 this.updateTask()
             } else {
                 Taro.hideLoading()

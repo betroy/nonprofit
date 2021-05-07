@@ -1,4 +1,4 @@
-import { observable } from 'mobx'
+import { observable, _allowStateChangesInsideComputed } from 'mobx'
 import Taro from '@tarojs/taro'
 import { Request } from '../core/network'
 import { Cache, Constants, Base64 } from '../core/utils'
@@ -132,8 +132,7 @@ const remouldStore = observable({
                 finishDate: dayjs().format('YYYY-MM-DD HH:mm:ss')
             });
             console.log('addTaskInfo success :>>', response)
-
-            if (response && response.returnCode == '0000') {
+            if (response && response.data.returnCode == '0000') {
                 this.updateTask()
             } else {
                 Taro.hideLoading()

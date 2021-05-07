@@ -63,6 +63,7 @@ class Index extends Component {
     if (userId == undefined) {
       this._navigateToLoadPage()
     } else {
+      console.log('userId', userId)
       this._setUserid(userId)
       this._setEnv(env)
       this._queryTaskFinishCount()
