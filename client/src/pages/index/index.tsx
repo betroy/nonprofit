@@ -227,7 +227,7 @@ class Index extends Component {
               <Image className='image' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_salon.png' />
               <View className='text-wrapper'>
                 <Text className='title'>环保沙龙</Text>
-                <Text className='desc'>5月20日起陆续开展，敬请期待</Text>
+                <Text className='desc'>{`5月20日起陆续开展，敬\n请期待`}</Text>
               </View>
             </View>
 
