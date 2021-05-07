@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '身边公益',
+  navigationBarTitleText: '环保低碳创益营',
 }

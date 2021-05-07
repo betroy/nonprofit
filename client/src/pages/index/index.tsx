@@ -151,11 +151,15 @@ class Index extends Component {
           <Image className='image-desc' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_desc.png' />
         </View>
 
-        <View className='back' />
+        <View className='back'
+          onClick={() => {
+            window.history.go(-1)
+          }} />
 
-        <View className='rule' onClick={() => {
-          this._showModal()
-        }} />
+        <View className='rule'
+          onClick={() => {
+            this._showModal()
+          }} />
 
         <View className='task-box'>
           <View className='task-count'>
@@ -215,7 +219,7 @@ class Index extends Component {
               <Image className='image' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_salon.png' />
               <View className='text-wrapper'>
                 <Text className='title'>环保沙龙</Text>
-                <Text className='desc'>线下交流发现更有爱的自己</Text>
+                <Text className='desc'>5月20日起陆续开展，敬请期待</Text>
               </View>
             </View>
 
