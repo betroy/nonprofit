@@ -15,6 +15,7 @@ type PageStateProps = {
     isFinishDonateTask: Boolean,
     isFinishRemouldTask: Boolean,
     isFinishSalonTask: Boolean,
+    isStartSalonTask: Boolean,
     taskFinishCount: Number,
     donateBookCount: Number,
     showModal: Function,
@@ -22,6 +23,7 @@ type PageStateProps = {
     queryTaskFinishCount: Function,
     queryTaskStatus: Function,
     querySalonTaskStatus: Function,
+    checkIsStartSalonTask: Function,
     setUserid: Function,
     setEnv: Function,
     navigateToLoadPage: Function,
@@ -69,6 +71,7 @@ class Index extends Component {
       this._queryTaskFinishCount()
       this._queryTaskStatus()
       this._querySalonTaskStatus()
+      this._checkIsStartSalonTask()
     }
   }
 
@@ -89,6 +92,11 @@ class Index extends Component {
   _querySalonTaskStatus() {
     const { indexStore } = this.props
     indexStore.querySalonTaskStatus()
+  }
+
+  _checkIsStartSalonTask() {
+    const { indexStore } = this.props
+    indexStore.checkIsStartSalonTask()
   }
 
   _setUserid(userid: string) {
@@ -140,7 +148,7 @@ class Index extends Component {
   }
 
   render() {
-    const { isShowRuleModal, isFinishDonateTask, isFinishRemouldTask, isFinishSalonTask, taskFinishCount, donateBookCount } = this.props.indexStore
+    const { isShowRuleModal, isFinishDonateTask, isFinishRemouldTask, isFinishSalonTask, isStartSalonTask, taskFinishCount, donateBookCount } = this.props.indexStore
 
     this._handleScroll(isShowRuleModal)
 
@@ -223,12 +231,12 @@ class Index extends Component {
               </View>
             </View>
 
-            <View className='btn-wrapper'
+            <View className={isStartSalonTask ? 'btn-wrapper' : 'btn-wrapper_unavailable'}
               onClick={() => {
-                isFinishRemouldTask ? null :
+                (isFinishRemouldTask || !isStartSalonTask) ? null :
                   this._navigateToSalon()
               }}>
-              <Text className='text'>{isFinishSalonTask ? '已完成' : '去参加'}</Text>
+              <Text className={isStartSalonTask ? 'text' : 'text_unavailable'}>{isStartSalonTask ? (isFinishSalonTask ? '已完成' : '去参加') : '待开启'}</Text>
             </View>
           </View>
         </View>

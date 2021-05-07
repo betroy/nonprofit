@@ -1,7 +1,8 @@
 import { observable } from 'mobx'
 import Taro from '@tarojs/taro'
 import { Request } from '../core/network'
-import { Cache, Constants } from '../core/utils'
+import { Constants } from '../core/utils'
+import * as dayjs from 'dayjs'
 
 const indexStore = observable({
   isShowRuleModal: false,
@@ -10,6 +11,7 @@ const indexStore = observable({
   isFinishDonateTask: false,  //是否完成旧衣捐赠任务
   isFinishRemouldTask: false, //是否完成旧物改造任务
   isFinishSalonTask: false, //是否完成线下沙龙任务
+  isStartSalonTask: false, //是否开启沙龙任务
   userid: '', //userId
   evn: Constants.ENV,
 
@@ -118,6 +120,11 @@ const indexStore = observable({
       console.log('querySalonTaskStatus error :>> ', error)
       throw error
     }
+  },
+
+  //检查是否满足沙龙任务开启时间
+  checkIsStartSalonTask() {
+    this.isStartSalonTask = dayjs().isAfter(dayjs('2021-05-20'))
   },
 
   //保留小程序传递的userid

@@ -211,6 +211,24 @@
       }
     }
 
+    .btn-wrapper_unavailable {
+      width: 130px;
+      height: 54px;
+      border-radius: 27px;
+      background: rgba(255, 72, 0, 0.1);
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .text_unavailable {
+        font-size: 28px;
+        font-family: PingFang SC;
+        color: #ff4800;
+        font-weight: 600;
+      }
+    }
+
     .left-wrapper {
       display: flex;
       flex-direction: row;
