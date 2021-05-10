@@ -11,7 +11,7 @@ class DonateStore {
     isShowDonateModal = false
 
     userid: string = ''//userId
-    evn = Constants.ENV //env
+    env = Constants.ENV_VALUE //env
 
     @action
     public takePhoto() {
@@ -43,8 +43,8 @@ class DonateStore {
                 console.log('uploadPhotoFile success :>>', res)
             }
             //异步更新任务状态
-            // this.updateTask()
-            this.addTaskInfo()
+            this.updateTask()
+            // this.addTaskInfo()
         } catch (error) {
             Taro.hideLoading()
             console.log('uploadPhotoFile error :>> ', error)
@@ -119,6 +119,7 @@ class DonateStore {
             const response = await Taro.cloud.callFunction({
                 name: 'add_task_info',
                 data: {
+                    env: this.env,
                     userId: this.userid,
                     task: {
                         taskName: '旧衣捐赠',
@@ -129,7 +130,19 @@ class DonateStore {
             })
             Taro.hideLoading()
             console.log('updateTask success :>>', response)
-            this.navigateToResult()
+            if (response && response.result.returnMsg) {
+                Taro.showToast({
+                    title: response.result.returnMsg,
+                    icon: 'none',
+                    duration: 2000
+                })
+
+                return
+            }
+
+            if (response && response.result.data) {
+                this.navigateToResult()
+            }
         } catch (error) {
             Taro.hideLoading()
             console.log('updateTask error :>> ', error)

@@ -13,7 +13,7 @@ const indexStore = observable({
   isFinishSalonTask: false, //是否完成线下沙龙任务
   isStartSalonTask: false, //是否开启沙龙任务
   userid: '', //userId
-  evn: Constants.ENV,
+  env: Constants.ENV_VALUE,
 
   showModal() {
     this.isShowRuleModal = true
@@ -97,29 +97,50 @@ const indexStore = observable({
 
   //查询线下沙龙任务完成状态
   async querySalonTaskStatus() {
-    const URL = '0' == this.env ? Constants.HOST.DEV : Constants.HOST.RELEASE
-
-    const request = new Request(
-      URL,
-      Constants.PATH.GET_SALON_TASKSTATUS
-    )
-
-    try {
-      const response = await request.post({
+    Taro.cloud.callFunction({
+      name: 'get_salon_task_status',
+      data: {
+        env: this.env,
         userId: this.userid
-      });
-      if (response.returnData &&
-        response.returnData.finishStatus == '1') {
-        this.isFinishSalonTask = true
-      } else {
-        this.isFinishSalonTask = false
       }
+    })
+      .then((res) => {
+        console.log('querySalonTaskStatus:', res)
 
-      console.log('querySalonTaskStatus success :>>', response)
-    } catch (error) {
-      console.log('querySalonTaskStatus error :>> ', error)
-      throw error
-    }
+        if (res && res.result.returnData) {
+          if (res.result.returnData.finishStatus == '1') {
+            this.isFinishSalonTask = true
+            return
+          }
+        }
+        this.isFinishSalonTask = false
+      })
+      .catch(console.error);
+
+
+    // const URL = '0' == this.env ? Constants.HOST.DEV : Constants.HOST.RELEASE
+
+    // const request = new Request(
+    //   URL,
+    //   Constants.PATH.GET_SALON_TASKSTATUS
+    // )
+
+    // try {
+    //   const response = await request.post({
+    //     userId: this.userid
+    //   });
+    //   if (response.returnData &&
+    //     response.returnData.finishStatus == '1') {
+    //     this.isFinishSalonTask = true
+    //   } else {
+    //     this.isFinishSalonTask = false
+    //   }
+
+    //   console.log('querySalonTaskStatus success :>>', response)
+    // } catch (error) {
+    //   console.log('querySalonTaskStatus error :>> ', error)
+    //   throw error
+    // }
   },
 
   //检查是否满足沙龙任务开启时间
@@ -147,14 +168,29 @@ const indexStore = observable({
   },
 
   navigateToDonate() {
+    let urlParams = ''
+    if (this.userid) {
+      urlParams += '?userId=' + this.userid
+    }
+    if (this.env) {
+      urlParams += '&env=' + this.env
+    }
+
     Taro.navigateTo({
-      url: Constants.PAGE.Donate + '?userId=' + this.userid + '&env=' + this.env
+      url: Constants.PAGE.Donate + urlParams
     })
   },
 
   navigateToRemould() {
+    let urlParams = ''
+    if (this.userid) {
+      urlParams += '?userId=' + this.userid
+    }
+    if (this.env) {
+      urlParams += '&env=' + this.env
+    }
     Taro.navigateTo({
-      url: Constants.PAGE.Remould + '?userId=' + this.userid + '&env=' + this.env
+      url: Constants.PAGE.Remould + urlParams
     })
   },
 

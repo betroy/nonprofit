@@ -8,23 +8,44 @@ const remouldStore = observable({
     isShowRuleModal: false,
     watermarkImage: '',
     userid: '', //userId
-    evn: Constants.ENV,
+    env: Constants.ENV_VALUE,
 
     navigatorToCartonCourse() {
+        let urlParams = ''
+        if (this.userid) {
+            urlParams += '?userId=' + this.userid
+        }
+        if (this.env) {
+            urlParams += '&env=' + this.env
+        }
         Taro.navigateTo({
-            url: Constants.PAGE.RemouldCartonCourse + '?userId=' + this.userid + '&env=' + this.env
+            url: Constants.PAGE.RemouldCartonCourse + urlParams
         })
     },
 
     navigatorToPlasticCourse() {
+        let urlParams = ''
+        if (this.userid) {
+            urlParams += '?userId=' + this.userid
+        }
+        if (this.env) {
+            urlParams += '&env=' + this.env
+        }
         Taro.navigateTo({
-            url: Constants.PAGE.RemouldPlasticCourse + '?userId=' + this.userid + '&env=' + this.env
+            url: Constants.PAGE.RemouldPlasticCourse + urlParams
         })
     },
 
     navigatorToClothesCourse() {
+        let urlParams = ''
+        if (this.userid) {
+            urlParams += '?userId=' + this.userid
+        }
+        if (this.env) {
+            urlParams += '&env=' + this.env
+        }
         Taro.navigateTo({
-            url: Constants.PAGE.RemouldClothesCourse + '?userId=' + this.userid + '&env=' + this.env
+            url: Constants.PAGE.RemouldClothesCourse + urlParams
         })
     },
 
@@ -74,8 +95,8 @@ const remouldStore = observable({
                 console.log('uploadPhotoFile success :>>', res)
             }
             //异步更新任务状态
-            // this.updateTask()
-            this.addTaskInfo()
+            this.updateTask()
+            // this.addTaskInfo()
         } catch (error) {
             Taro.hideLoading()
             console.log('uploadPhotoFile error :>> ', error)
@@ -149,6 +170,7 @@ const remouldStore = observable({
             const response = await Taro.cloud.callFunction({
                 name: 'add_task_info',
                 data: {
+                    env: this.env,
                     userId: this.userid,
                     task: {
                         taskName: '旧物改造',
@@ -159,7 +181,19 @@ const remouldStore = observable({
             })
             Taro.hideLoading()
             console.log('updateTask success :>>', response)
-            this.navigateToResult()
+            if (response && response.result.returnMsg) {
+                Taro.showToast({
+                    title: response.returnMsg,
+                    icon: 'none',
+                    duration: 2000
+                })
+
+                return
+            }
+
+            if (response && response.result.data) {
+                this.navigateToResult()
+            }
         } catch (error) {
             Taro.hideLoading()
             console.log('updateTask error :>> ', error)

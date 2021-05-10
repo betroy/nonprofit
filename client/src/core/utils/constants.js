@@ -84,7 +84,9 @@ const Constants = {
   //云开发环境ID
   ENV: {
     ID: IS_DEBUG ? ENV_DEV : ENV_RELEASE
-  }
+  },
+
+  ENV_VALUE: ENV,
 }
 
 module.exports = Constants;

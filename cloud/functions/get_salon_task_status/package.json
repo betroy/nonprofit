@@ -1,9 +1,8 @@
 {
-  "name": "add_task_info",
+  "name": "get_salon_task_status",
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "@cloudbase/node-sdk": "^2.5.1",
     "got": "^11.8.2"
   }
 }

@@ -30,6 +30,15 @@
               }
             },
             {
+              "name": "get_salon_task_status",
+              "config": {
+                "timeout": 20,
+                "envVariables": {},
+                "runtime": "Nodejs10.15",
+                "memorySize": 256
+              }
+            },
+            {
               "name": "add_task_info",
               "config": {
                 "timeout": 20,
