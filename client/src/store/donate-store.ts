@@ -140,7 +140,7 @@ class DonateStore {
                 return
             }
 
-            if (response && response.result.data) {
+            if (response && response.result) {
                 this.navigateToResult()
             }
         } catch (error) {
