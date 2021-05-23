@@ -92,8 +92,12 @@ const remouldStore = observable({
                     cloudPath: cloudPathName,
                     filePath: tempFile.originalFileObj// 文件路径
                 })
+                 //事件埋点--旧物改造页上传照片总数
+                 _hmt.push(['_trackEvent', 'remould', 'uploadPhotoCount']);
                 console.log('uploadPhotoFile success :>>', res)
             }
+             //事件埋点--完成旧物改造页照片上传人数
+             _hmt.push(['_trackEvent', 'remould', 'uploadPhotoFileSuccess']);
             //异步更新任务状态
             this.updateTask()
             // this.addTaskInfo()

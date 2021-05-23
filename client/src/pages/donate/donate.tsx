@@ -91,10 +91,18 @@ class Donate extends Component {
         <View className='back' onClick={() => {
           this._goBack()
         }} />
-        <Image className='image-donate-tips' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/ic_donate_tips.png' />
-        <Image className='image-submit-btn' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/ic_donate_take_photo_btn.png' onClick={() => {
-          this._takePhoto()
-        }}>拍照上传我的捐赠时刻</Image>
+        <View
+          onLongPress={() => {
+            _hmt.push(['_trackEvent', 'donate', 'onLongPressQRCode']);
+          }}
+        >
+          <Image className='image-donate-tips' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/ic_donate_tips.png'
+          />
+        </View>
+        <Image className='image-submit-btn' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/ic_donate_take_photo_btn.png'
+          onClick={() => {
+            this._takePhoto()
+          }}>拍照上传我的捐赠时刻</Image>
 
         {isShowDonateModal &&
           <DonateResultModal onCloseClick={() => {

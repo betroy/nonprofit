@@ -40,8 +40,12 @@ class DonateStore {
                     cloudPath: cloudPathName,
                     filePath: tempFile.originalFileObj// 文件路径
                 })
+                //事件埋点--旧衣捐赠页上传照片总数
+                _hmt.push(['_trackEvent', 'donate', 'uploadPhotoCount']);
                 console.log('uploadPhotoFile success :>>', res)
             }
+            //事件埋点--完成旧衣捐赠页照片上传人数
+            _hmt.push(['_trackEvent', 'donate', 'uploadPhotoFileSuccess']);
             //异步更新任务状态
             this.updateTask()
             // this.addTaskInfo()
