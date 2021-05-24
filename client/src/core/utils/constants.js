@@ -71,7 +71,8 @@ const Constants = {
     LoadPage: '/branch/mkt/benefit/dist/index.html#/loadpage',
     TaskSuccess: '/kuaizhan/page/optmng/stationmgmt/20210416/h46905.html?ai_id=kuaizhan_h46905',
     SharePage: '/kuaizhan/page/optmng/stationmgmt/20210506/h47867.html?ai_id=kuaizhan_h47867',
-    SalonPage: '/branch/mkt/receptionroom/salon/index.html#/cityRankList?queryStatus=001&subjectTag=低碳创益营'
+    SalonPage: '/branch/mkt/receptionroom/salon/index.html#/cityRankList?queryStatus=001&subjectTag=低碳创益营',
+    FMYPage: 'https://openapp.fmy90.com/h5/#/pages/newClothes/newClothes?recycleCategory=CLOTHES&platformKey=CC73BCF9188ED83481D115B573B225C7',
   },
 
   // 1-旧衣捐赠 2-旧物改造 3-线下沙龙

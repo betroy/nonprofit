@@ -12,6 +12,7 @@ type PageStateProps = {
     takePhoto: Function,
     hideDonateModal: Function,
     navigateToLoadPage: Function,
+    navigateTofmy: Function,
     setEnv: Function,
     setUserid: Function,
   }
@@ -72,6 +73,11 @@ class Donate extends Component {
     donateStore.navigateToLoadPage()
   }
 
+  _navigateTofmy = () => {
+    const { donateStore } = this.props
+    donateStore.navigateTofmy()
+  }
+
   _setEnv(env: string) {
     const { donateStore } = this.props
     donateStore.setEnv(env)
@@ -91,13 +97,12 @@ class Donate extends Component {
         <View className='back' onClick={() => {
           this._goBack()
         }} />
-        <View
-          onLongPress={() => {
-            _hmt.push(['_trackEvent', 'donate', 'onLongPressQRCode']);
-          }}
-        >
-          <Image className='image-donate-tips' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/ic_donate_tips.png'
-          />
+        <View className='image-donate-tips-wrapper'>
+          <Image className='image-donate-tips' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/ic_donate_tips.png' />
+          <Image className='image-donate-tips-btn' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/ic_donate_tips_btn.png'
+            onClick={() => {
+              this._navigateTofmy()
+            }} />
         </View>
         <Image className='image-submit-btn' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/donate/ic_donate_take_photo_btn.png'
           onClick={() => {

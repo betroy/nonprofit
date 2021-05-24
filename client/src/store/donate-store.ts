@@ -62,6 +62,12 @@ class DonateStore {
         window.location.href = URL + Constants.H5_PAGE.TaskSuccess
     }
 
+    public navigateTofmy() {
+        _hmt.push(['_trackEvent', 'donate', 'onClickQRCode'])
+
+        window.location.href = Constants.H5_PAGE.FMYPage
+    }
+
     public redirectToIndex() {
         Taro.redirectTo({
             url: Constants.PAGE.Index

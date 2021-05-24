@@ -195,6 +195,9 @@ const indexStore = observable({
   },
 
   navigateToSalon() {
+     //事件埋点--环保沙龙点击事件
+     _hmt.push(['_trackEvent', 'index', 'onClickSalonTask']);
+
     const URL = '0' == this.env ? Constants.H5_HOST.DEV : Constants.H5_HOST.RELEASE
 
     window.location.href = URL + Constants.H5_PAGE.SalonPage

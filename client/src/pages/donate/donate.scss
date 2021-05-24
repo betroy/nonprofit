@@ -93,10 +93,22 @@
   margin-top: 18px;
 }
 
+.image-donate-tips-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .image-donate-tips {
   width: 633px;
   height: 396px;
   margin-top: 564px;
+}
+
+.image-donate-tips-btn {
+  width: 240px;
+  height: 65px;
+  position: absolute;
+  top: 875px;
 }
 
 .image-bubble {
