@@ -227,16 +227,16 @@ class Index extends Component {
               <Image className='image' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_salon.png' />
               <View className='text-wrapper'>
                 <Text className='title'>环保沙龙</Text>
-                <Text className='desc'>{`5月20日起陆续开展，敬\n请期待`}</Text>
+                <Text className='desc'>线下交流发现更有爱的自己</Text>
               </View>
             </View>
 
             <View className={isStartSalonTask ? 'btn-wrapper' : 'btn-wrapper_unavailable'}
               onClick={() => {
-                (isFinishSalonTask || !isStartSalonTask) ? null :
+                isFinishSalonTask ? null :
                   this._navigateToSalon()
               }}>
-              <Text className={isStartSalonTask ? 'text' : 'text_unavailable'}>{isStartSalonTask ? (isFinishSalonTask ? '已完成' : '去参加') : '待开启'}</Text>
+              <Text className={isStartSalonTask ? 'text' : 'text_unavailable'}>{isFinishSalonTask ? '已完成' : '去参加'}</Text>
             </View>
           </View>
         </View>
