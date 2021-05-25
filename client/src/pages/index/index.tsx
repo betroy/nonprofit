@@ -233,7 +233,7 @@ class Index extends Component {
 
             <View className={isStartSalonTask ? 'btn-wrapper' : 'btn-wrapper_unavailable'}
               onClick={() => {
-                (isFinishRemouldTask || !isStartSalonTask) ? null :
+                (isFinishSalonTask || !isStartSalonTask) ? null :
                   this._navigateToSalon()
               }}>
               <Text className={isStartSalonTask ? 'text' : 'text_unavailable'}>{isStartSalonTask ? (isFinishSalonTask ? '已完成' : '去参加') : '待开启'}</Text>
