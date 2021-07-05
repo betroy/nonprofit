@@ -114,7 +114,7 @@
 .task-box {
   display: flex;
   width: 671px;
-  height: 802px;
+  height: 849px;
   align-self: center;
   flex-direction: column;
   background-size: 100% 100%;
@@ -215,7 +215,7 @@
       width: 130px;
       height: 54px;
       border-radius: 27px;
-      background: rgba(255, 72, 0, 0.1);
+      background: rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -224,7 +224,8 @@
       .text_unavailable {
         font-size: 28px;
         font-family: PingFang SC;
-        color: #ff4800;
+        // color: #ff4800;
+        color: rgba(0, 0, 0, 0.4);
         font-weight: 600;
       }
     }
@@ -259,6 +260,14 @@
     height: 192px;
     margin-top: 105px;
   }
+}
+
+.image-list{
+  width: 690px;
+  height: 1243px;
+  align-self: center;
+  margin-top: 63px;
+  margin-bottom: 110px;
 }
 
 .image-classroom {

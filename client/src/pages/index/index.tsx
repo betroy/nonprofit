@@ -173,14 +173,14 @@ class Index extends Component {
           <View className='task-count'>
             <View className='task-count-wrapper'>
               <Text className='task-count-label'>完成任务人数</Text>
-              <Text className='task-count-text'>{taskFinishCount}</Text>
+              <Text className='task-count-text'>{"263"}</Text>
             </View>
 
             <View className='task-count-line' />
 
             <View className='task-count-wrapper'>
               <Text className='task-count-label'>已捐出书本</Text>
-              <Text className='task-count-text'>{donateBookCount}</Text>
+              <Text className='task-count-text'>{"26"}</Text>
             </View>
           </View>
 
@@ -195,12 +195,8 @@ class Index extends Component {
               </View>
             </View>
 
-            <View className='btn-wrapper'
-              onClick={() => {
-                isFinishDonateTask ? null :
-                  this._navigateToDonate()
-              }}>
-              <Text className='text'>{isFinishDonateTask ? '已完成' : '去捐赠'}</Text>
+            <View className='btn-wrapper_unavailable'>
+              <Text className={'text_unavailable'}>{'已结束'}</Text>
             </View>
           </View>
 
@@ -213,12 +209,8 @@ class Index extends Component {
               </View>
             </View>
 
-            <View className='btn-wrapper'
-              onClick={() => {
-                isFinishRemouldTask ? null :
-                  this._navigateToRemould()
-              }}>
-              <Text className='text'>{isFinishRemouldTask ? '已完成' : '去改造'}</Text>
+            <View className='btn-wrapper_unavailable'>
+              <Text className={'text_unavailable'}>{'已结束'}</Text>
             </View>
           </View>
 
@@ -231,15 +223,13 @@ class Index extends Component {
               </View>
             </View>
 
-            <View className={isStartSalonTask ? 'btn-wrapper' : 'btn-wrapper_unavailable'}
-              onClick={() => {
-                isFinishSalonTask ? null :
-                  this._navigateToSalon()
-              }}>
-              <Text className={isStartSalonTask ? 'text' : 'text_unavailable'}>{isFinishSalonTask ? '已完成' : '去参加'}</Text>
+            <View className='btn-wrapper_unavailable'>
+              <Text className={'text_unavailable'}>{'已结束'}</Text>
             </View>
           </View>
         </View>
+
+        <Image className='image-list' src='https://6e6f-nonprofit-8g11k5jj7aa730f7-1254641557.tcb.qcloud.la/assets/index/ic_index_list.png' />
 
         <View className='index_gift_wrapper'>
           {
